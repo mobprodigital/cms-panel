@@ -1,3 +1,25 @@
-<p>
-  login works!
-</p>
+<main>
+  <section class="login-section">
+    <form action="">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Login to your account</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <mat-form-field class="form-field-block">
+            <input matInput placeholder="Email">
+          </mat-form-field>
+
+          <mat-form-field class="form-field-block">
+            <input matInput type="password" placeholder="Password">
+          </mat-form-field>
+          <a routerLink="/login/login/forgot-password">Forgot password ?</a>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button type="submit" mat-raised-button color="primary">Login</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </section>
+</main>
