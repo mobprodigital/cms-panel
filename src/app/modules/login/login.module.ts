@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 //material modules
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatInputModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, ResetPasswordComponent, VerifyEmailComponent],
   exports: [LoginRoutingModule]
 })
 export class LoginModule { }
