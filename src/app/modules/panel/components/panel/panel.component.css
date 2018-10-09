@@ -1,0 +1,37 @@
+header.side-nav-header {
+  padding: 20px 55px;
+  text-align: left;
+}
+
+.sidenav-content {
+  min-height: 89vh;
+}
+
+aside.main-side-nav {
+  min-width: 250px;
+}
+
+.sidenav-content {
+  padding: 50px;
+  background-color: #f1f2f7;
+}
+
+ul.main-menu-group {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a.main-menu-item {
+  padding: 5px 6px;
+  display: inline-block;
+  width: 100%;
+}
+
+.panel-name {
+  min-width: 220px;
+}
+
+.toolbar-saparator {
+  flex: 1 1 auto;
+}

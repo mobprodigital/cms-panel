@@ -1,3 +1,64 @@
-<p>
-  create-user works!
-</p>
+<h1 class="page-title">Create new user</h1>
+<mat-card class="example-card">
+  <mat-card-content>
+    <form>
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput placeholder="First Name">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput placeholder="Last Name">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput type="email" placeholder="Email">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput type="tel" placeholder="Phone">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <mat-select placeholder="Select Role">
+              <mat-option [value]="Admin">
+                Admin
+              </mat-option>
+              <mat-option [value]="User">
+                User
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <mat-select placeholder="Select Portal" multiple>
+              <mat-option [value]="ninexm">
+                9xm
+              </mat-option>
+              <mat-option [value]="BoogleTv">
+                BoogleTv
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <button type="button" mat-raised-button color="primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+
+  </mat-card-actions>
+</mat-card>

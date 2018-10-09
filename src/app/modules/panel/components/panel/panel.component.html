@@ -1,5 +1,68 @@
-<p>
-  panel component works!
-</p>
+<mat-toolbar class="container-fluid" color="primary">
+  <mat-toolbar-row>
+    <span class="panel-name">CMS Panel</span>
+    <button type="button" mat-icon-button (click)="drawer.toggle()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <span class="toolbar-saparator"></span>
+    <span class="">
 
-<router-outlet></router-outlet>
+
+
+      <button mat-button [matMenuTriggerFor]="userOptions">
+        <mat-icon>arrow_drop_down</mat-icon> Gyan Parkash
+      </button>
+      <mat-menu #userOptions="matMenu">
+
+        <button mat-menu-item>
+          <i class="fas fa-user-tie"></i> Profile</button>
+        <button mat-menu-item>
+          <i class="fas fa-gear"></i> Setting</button>
+        <button mat-menu-item>
+          <i class="fas fa-sign-out-alt"></i> Logout</button>
+      </mat-menu>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container autosize>
+  <mat-drawer opened #drawer mode="side">
+    <aside class="main-side-nav">
+      <header class="side-nav-header">
+        Gyan Parkash
+      </header>
+      <section class="side-nav-main">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                User Accounts
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <section>
+              <ul class="main-menu-group">
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Create
+                    User</a>
+                </li>
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">All Users</a>
+                </li>
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Roles</a>
+                </li>
+              </ul>
+            </section>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
+    </aside>
+
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</mat-drawer-container>
