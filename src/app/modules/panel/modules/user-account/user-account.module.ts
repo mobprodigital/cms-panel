@@ -7,6 +7,8 @@ import { MatCardModule, MatTableModule, MatInputModule, MatSelectModule, MatButt
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { CreateClientComponent } from './components/create-client/create-client.component';
 import { AllClientComponent } from './components/all-client/all-client.component';
+import { AjaxService } from 'src/app/services/ajax/ajax.service';
+import { UserAccountService } from 'src/app/services/user-account/user-account.service';
 
 @NgModule({
   imports: [
@@ -25,6 +27,7 @@ import { AllClientComponent } from './components/all-client/all-client.component
     MatTableModule
   ],
   declarations: [UserAccountComponent, CreateUserComponent, AllUsersComponent, CreateClientComponent, AllClientComponent],
-  exports: [UserAccountRoutingModule, MatCardModule]
+  exports: [UserAccountRoutingModule, MatCardModule],
+  providers : [AjaxService, UserAccountService]
 })
 export class UserAccountModule { }
