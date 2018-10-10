@@ -1,6 +1,7 @@
 <main>
+
   <section class="login-section">
-    <form action="">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>Login to your account</mat-card-title>
@@ -8,17 +9,24 @@
         <mat-card-content>
 
           <mat-form-field class="form-field-block">
-            <input matInput placeholder="Email">
+            <input formControlName="email" matInput placeholder="Email">
+            <mat-error *ngIf="loginForm.controls.email.invalid">
+              Please enter your email
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="form-field-block">
-            <input matInput type="password" placeholder="Password">
+            <input formControlName="password" matInput type="password" placeholder="Password">
+            <mat-error *ngIf="loginForm.controls.password.invalid">
+              Please enter your password
+            </mat-error>
           </mat-form-field>
+          <br>
           <a routerLink="/login/verify-email">Forgot password ?</a>
-        </mat-card-content>
-        <mat-card-actions align="end">
+          <br>
+          <br>
           <button type="submit" mat-raised-button color="primary">Login</button>
-        </mat-card-actions>
+        </mat-card-content>
       </mat-card>
     </form>
   </section>

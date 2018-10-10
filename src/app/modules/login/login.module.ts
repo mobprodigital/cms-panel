@@ -4,11 +4,11 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginRoutingModule } from './login-routing/login-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-//material modules
+
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -17,6 +17,8 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [LoginComponent, ResetPasswordComponent, VerifyEmailComponent],
   exports: [LoginRoutingModule]
