@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-6">
-    <h1 class="page-title">All Clients</h1>
+    <h1 class="page-title">All Portals</h1>
   </div>
   <div class="col-6 text-right">
     <button type="button" mat-raised-button color="primary">Add new</button>
@@ -14,29 +14,27 @@
 <div>
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.portalId}} </td>
     </ng-container>
 
-    <!-- Progress Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.portalName}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
       <td mat-cell *matCellDef="let row"> {{row.email}} </td>
     </ng-container>
-
-    <!-- Color Column -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-      <td mat-cell *matCellDef="let row"> 9812XXXXXXXXXX </td>
+   
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> url </th>
+      <td mat-cell *matCellDef="let row"> {{row.url}} </td>
     </ng-container>
+
+    
     
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>

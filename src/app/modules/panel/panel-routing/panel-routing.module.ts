@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from '../components/panel/panel.component';
-import { } from '../modules/video/video.module'
+
 
 const panelRoutes: Routes = [
   {
@@ -16,6 +16,10 @@ const panelRoutes: Routes = [
       {
         path: 'user-account',
         loadChildren: '../modules/user-account/user-account.module#UserAccountModule'
+      },
+      {
+        path: 'portal',
+        loadChildren: '../modules/portals/portals.module#PortalsModule'
       }
 
     ]

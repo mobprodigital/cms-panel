@@ -14,7 +14,7 @@
 
         <button mat-menu-item>
           <i class="fas fa-user-tie"></i> Profile</button>
-          
+
         <button mat-menu-item>
           <i class="fas fa-gear"></i> Setting</button>
 
@@ -25,6 +25,9 @@
     </span>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<!-- <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar> -->
+
 <mat-drawer-container autosize>
   <mat-drawer opened #drawer mode="side">
     <aside class="main-side-nav">
@@ -43,19 +46,45 @@
               <ul class="main-menu-group">
 
                 <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-client" routerLinkActive="active">Create Clients</a>
-                </li>
-                
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/all-clients" routerLinkActive="active">All Clients</a>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-client" routerLinkActive="active">Create
+                    Clients</a>
                 </li>
 
                 <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Create User</a>
+                  <a class="main-menu-item" routerLink="/panel/user-account/all-clients" routerLinkActive="active">All
+                    Clients</a>
                 </li>
 
                 <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/all-users" routerLinkActive="active">All Users</a>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Create
+                    User</a>
+                </li>
+
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/user-account/all-users" routerLinkActive="active">All
+                    Users</a>
+                </li>
+
+              </ul>
+            </section>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Portals
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <section>
+              <ul class="main-menu-group">
+
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/portal/create-portal" routerLinkActive="active">Create
+                    Portal</a>
+                </li>
+
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/portal/all-portals" routerLinkActive="active">All
+                    Portals</a>
                 </li>
 
               </ul>

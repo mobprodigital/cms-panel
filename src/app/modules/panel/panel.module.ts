@@ -9,7 +9,8 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatButtonModule,
-  MatMenuModule
+  MatMenuModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 
@@ -22,7 +23,8 @@ import {
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ],
   declarations: [PanelComponent],
 })

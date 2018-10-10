@@ -1,10 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { CreatePortalComponent } from '../components/create-portal/create-portal.component';
+import { AllPortalsComponent } from '../components/all-portals/all-portals.component';
 
+const portalRoutes: Routes = [
+  {
+    path: 'create-portal',
+    component: CreatePortalComponent
+  },
+  {
+    path: 'all-portals',
+    component: AllPortalsComponent
+  }
+];
 @NgModule({
   imports: [
-    CommonModule
+    RouterModule.forChild(portalRoutes)
   ],
-  declarations: []
+  exports: [RouterModule]
 })
 export class PortalRoutingModule { }
