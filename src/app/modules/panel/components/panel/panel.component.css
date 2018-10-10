@@ -28,6 +28,21 @@ a.main-menu-item {
   width: 100%;
 }
 
+a.main-menu-item.active {
+  position: relative;
+  padding-left: 10px;
+}
+
+a.main-menu-item.active:before {
+  content: '';
+  display: block;
+  height: 17px;
+  width: 3px;
+  position: absolute;
+  left: 0;
+  background: #197ad5;
+}
+
 .panel-name {
   min-width: 220px;
 }

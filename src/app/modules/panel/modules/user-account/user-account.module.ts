@@ -3,18 +3,28 @@ import { CommonModule } from '@angular/common';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { UserAccountRoutingModule } from './user-account-routing/user-account-routing.module';
 import { UserAccountComponent } from './components/user-account/user-account.component';
-import { MatCardModule, MatInputModule, MatSelectModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatTableModule, MatInputModule, MatSelectModule, MatButtonModule, MatListModule, MatExpansionModule, MatIconModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { AllUsersComponent } from './components/all-users/all-users.component';
+import { CreateClientComponent } from './components/create-client/create-client.component';
+import { AllClientComponent } from './components/all-client/all-client.component';
 
 @NgModule({
   imports: [
     CommonModule,
     UserAccountRoutingModule,
+    MatIconModule,
     MatCardModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
-  declarations: [UserAccountComponent, CreateUserComponent],
+  declarations: [UserAccountComponent, CreateUserComponent, AllUsersComponent, CreateClientComponent, AllClientComponent],
   exports: [UserAccountRoutingModule, MatCardModule]
 })
 export class UserAccountModule { }

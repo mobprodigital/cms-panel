@@ -7,8 +7,6 @@
     <span class="toolbar-saparator"></span>
     <span class="">
 
-
-
       <button mat-button [matMenuTriggerFor]="userOptions">
         <mat-icon>arrow_drop_down</mat-icon> Gyan Parkash
       </button>
@@ -16,10 +14,13 @@
 
         <button mat-menu-item>
           <i class="fas fa-user-tie"></i> Profile</button>
+          
         <button mat-menu-item>
           <i class="fas fa-gear"></i> Setting</button>
+
         <button mat-menu-item>
           <i class="fas fa-sign-out-alt"></i> Logout</button>
+
       </mat-menu>
     </span>
   </mat-toolbar-row>
@@ -40,16 +41,23 @@
             </mat-expansion-panel-header>
             <section>
               <ul class="main-menu-group">
+
                 <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Create
-                    User</a>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-client" routerLinkActive="active">Create Clients</a>
                 </li>
+                
                 <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">All Users</a>
+                  <a class="main-menu-item" routerLink="/panel/user-account/all-clients" routerLinkActive="active">All Clients</a>
                 </li>
+
                 <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Roles</a>
+                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Create User</a>
                 </li>
+
+                <li>
+                  <a class="main-menu-item" routerLink="/panel/user-account/all-users" routerLinkActive="active">All Users</a>
+                </li>
+
               </ul>
             </section>
           </mat-expansion-panel>

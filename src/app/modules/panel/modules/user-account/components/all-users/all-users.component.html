@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-6">
+    <h1 class="page-title">All Users</h1>
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" mat-raised-button color="primary">Add new</button>
+  </div>  
+</div>
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel *ngFor="let usr of userList" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{usr.firstName}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{usr.email}}
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-action-row>
+      <button mat-button color="primary">Edit</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
