@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { PortalModel } from 'src/app/models/portal.model';
+import { PortalService } from 'src/app/services/portal/portal.service';
 
 @Component({
   selector: 'app-all-portals',
@@ -9,30 +10,24 @@ import { PortalModel } from 'src/app/models/portal.model';
 })
 export class AllPortalsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'email', 'action'];
+  displayedColumns: string[] = ['name', 'email', 'url', 'action'];
   dataSource: MatTableDataSource<PortalModel>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private _portalService: PortalService) {
 
-    const users = Array.from({ length: 5 }, (counter, i) => {
-      let client: PortalModel = new PortalModel();
-      client.portalId = i.toString();
-      client.portalName = 'Portal ' + (i + 1);
-      client.email = `portal${i + 1}@somedomain.com`;
-      client.url = `somedomain${i + 1}.com`;
-      return client;
-    });
+    this._portalService.getAllPortals().then(portals => {
+      this.dataSource = new MatTableDataSource(portals);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
 
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

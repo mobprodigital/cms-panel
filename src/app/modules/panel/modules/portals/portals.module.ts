@@ -4,6 +4,9 @@ import { CreatePortalComponent } from './components/create-portal/create-portal.
 import { AllPortalsComponent } from './components/all-portals/all-portals.component';
 import { PortalRoutingModule } from './portal-routing/portal-routing.module';
 import { MatCardModule, MatTableModule, MatInputModule, MatSelectModule, MatButtonModule, MatListModule, MatExpansionModule, MatIconModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { AjaxService } from 'src/app/services/ajax/ajax.service';
+import { UserAccountService } from 'src/app/services/user-account/user-account.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -18,9 +21,12 @@ import { MatCardModule, MatTableModule, MatInputModule, MatSelectModule, MatButt
     MatExpansionModule,
     MatIconModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [CreatePortalComponent, AllPortalsComponent],
-  exports: [PortalRoutingModule, MatCardModule]
+  exports: [PortalRoutingModule, MatCardModule],
+  providers: [AjaxService, UserAccountService]
 })
 export class PortalsModule { }

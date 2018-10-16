@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 export namespace CustomValidators {
     let emailRgx: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    let urlRgx: RegExp = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/;
+    let urlRgx: RegExp = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/;
 
     let intRgx: RegExp = /^-?\d*$/;
 
@@ -32,7 +32,7 @@ export namespace CustomValidators {
      * @param control Control whose value to be validate
      */
     export function ValidateUrl(control: AbstractControl) {
-        if (!control.value || !control.value.trim()) {
+        if (!control.value) {
             return null
         }
         else if (!urlRgx.test(control.value)) {
