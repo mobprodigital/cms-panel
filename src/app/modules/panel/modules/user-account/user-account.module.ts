@@ -9,6 +9,7 @@ import { CreateClientComponent } from './components/create-client/create-client.
 import { AllClientComponent } from './components/all-client/all-client.component';
 import { AjaxService } from 'src/app/services/ajax/ajax.service';
 import { UserAccountService } from 'src/app/services/user-account/user-account.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -24,10 +25,12 @@ import { UserAccountService } from 'src/app/services/user-account/user-account.s
     MatPaginatorModule,
     MatSortModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [UserAccountComponent, CreateUserComponent, AllUsersComponent, CreateClientComponent, AllClientComponent],
-  exports: [UserAccountRoutingModule, MatCardModule],
+  exports: [UserAccountRoutingModule],
   providers : [AjaxService, UserAccountService]
 })
 export class UserAccountModule { }

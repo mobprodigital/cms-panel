@@ -6,20 +6,35 @@
     <button type="button" mat-raised-button color="primary">Add new</button>
   </div>  
 </div>
-<mat-accordion class="example-headers-align">
-  <mat-expansion-panel *ngFor="let usr of userList" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{usr.firstName}}
-      </mat-panel-title>
-      <mat-panel-description>
-        {{usr.email}}
-        <mat-icon>account_circle</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-action-row>
-      <button mat-button color="primary">Edit</button>
-    </mat-action-row>
-  </mat-expansion-panel>
 
-</mat-accordion>
+<table mat-table [dataSource]="dataSource" matSort>
+
+  <!-- Client Name -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+  </ng-container>
+
+  <!-- Color Column -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+    <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+    <td mat-cell *matCellDef="let row"> <a href="javascript:void(0)">Edit</a> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

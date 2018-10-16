@@ -1,17 +1,12 @@
 export class ClientModel {
-    public firstName: string = "";
-    public lastName: string = "";
-    public id: string = "";
+    public clientName: string = "";
+    public clientId: string = "";
     public email: string = "";
-    public password: string = "";
-    public agreemtnTenure: number = 0;
-    public portalAssigned: number[] = [];
+    public phone: string = "";
+    public skypeId: string = "";
+    public agreementTenure: number = 0;
+    public assignedPortals: number[] = [];
     public address: string = "";
-
-
-    public get name(): string {
-        return this.firstName + (this.lastName ? ' ' + this.lastName : '');
-    }
-
+    public domain: string = "";
 
 }

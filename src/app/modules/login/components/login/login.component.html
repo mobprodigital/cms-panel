@@ -3,6 +3,7 @@
   <section class="login-section">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-card class="example-card">
+        <mat-progress-bar [hidden]="!showProgressBar" class="loginProgressBar" mode="indeterminate"></mat-progress-bar>
         <mat-card-header>
           <mat-card-title>Login to your account</mat-card-title>
         </mat-card-header>
@@ -22,10 +23,12 @@
             </mat-error>
           </mat-form-field>
           <br>
+          <div *ngIf="loginFail" class="text-danger">{{loginErrMsg}}</div>
+          <br>
           <a routerLink="/login/verify-email">Forgot password ?</a>
           <br>
           <br>
-          <button type="submit" mat-raised-button color="primary">Login</button>
+          <button [disabled]="loginForm.invalid || showProgressBar" type="submit" mat-raised-button color="primary">Login</button>
         </mat-card-content>
       </mat-card>
     </form>

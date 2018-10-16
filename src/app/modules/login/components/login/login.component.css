@@ -1,0 +1,31 @@
+.loginProgressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+section.login-section {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background: url('/assets/images/bg/login.jpg') no-repeat scroll center;
+}
+
+section.login-section form {
+  flex-basis: 30%;
+}
+
+@media screen and (max-width : 992px) {
+  section.login-section form {
+    flex-basis: 50%;
+  }
+}
+
+@media screen and (max-width : 768px) {
+  section.login-section form {
+    flex-basis: 80%;
+  }
+}

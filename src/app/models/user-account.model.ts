@@ -5,7 +5,10 @@ export class UserAccountModel {
     public email: string = "";
     public phone: string = "";
     public role: string = "";
-    public id: string = ""
+    public userId: string = "";
+    public clientId: string = "";
+    public assignedPortals: string[] = [];
+    
 
     /** Get full name of user */
     public get name(): string {

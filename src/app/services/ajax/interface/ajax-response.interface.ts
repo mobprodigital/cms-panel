@@ -2,7 +2,7 @@ export interface AjaxResponse {
     /**
      * Response code , 1 for success and 0 incase of failure 
      */
-    responseCode: number;
+    status: boolean;
     /**
      * Data returned by web api 
      */

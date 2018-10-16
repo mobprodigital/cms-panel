@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserAccountModel } from 'src/app/models/user-account.model';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { UserAccountService } from 'src/app/services/user-account/user-account.service';
 
 @Component({
   selector: 'app-all-users',
@@ -8,16 +10,37 @@ import { UserAccountModel } from 'src/app/models/user-account.model';
 })
 export class AllUsersComponent implements OnInit {
 
-  public userList: UserAccountModel[] = Array.from({ length: 5 }, (counter, i) => {
-    let user: UserAccountModel = new UserAccountModel();
-    user.id = i.toString();
-    user.firstName = 'User ' + (i + 1);
-    user.email = `username${i + 1}@mail.com`;
-    return user;
-  });
-  constructor() { }
+
+  displayedColumns: string[] = ['name', 'email', 'phone', 'action'];
+  dataSource: MatTableDataSource<UserAccountModel>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  public userList: UserAccountModel[] = [];
+
+  constructor(private _userAccountService: UserAccountService) { 
+    this.getAllUsers();
+  }
 
   ngOnInit() {
+  }
+
+
+  public applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+
+  public getAllUsers() {
+    this._userAccountService.getAllUsers().then(clients => {
+      this.dataSource = new MatTableDataSource(clients);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
 
 }
