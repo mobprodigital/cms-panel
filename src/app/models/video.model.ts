@@ -21,4 +21,7 @@ export class VideoModel {
     public category: string[] = [];
     public singer: string = "";
     public country: string = "";
+  videoId: any;
+  clientId: any;
+  videoTags: any;
 }

@@ -277,7 +277,7 @@
           <!-- video file upload -->
           <div class="col-md-6 col-sm-6">
             <section class="upload-section">
-              <div>Upload video file</div>
+              <p>Upload video file</p>
               <label class="file-label">
                 <input accept="video/*" type="file" name="videoFile" />
               </label>
@@ -287,7 +287,7 @@
           <!-- video thumbnail upload -->
           <div class="col-md-6 col-sm-6">
             <section class="upload-section">
-              <div>Upload video thumbnail</div>
+              <p>Upload video thumbnail</p>
               <label class="file-label">
                 <input accept="image/*" type="file" name="videoThumbnail" />
               </label>
@@ -296,14 +296,14 @@
         </section>
         <br>
         <section class="upload-progress-sec">
-          <p>{{uploadProgess}}% completed</p>
+          <div>{{uploadProgess}}% completed</div>
           <mat-progress-bar mode="determinate" [value]="uploadProgess"></mat-progress-bar>
         </section>
         <br>
         <div>
           <button type="button" mat-raised-button color="primary">
             <mat-icon>cloud_upload</mat-icon>
-            Upload video</button> &nbsp;
+            Start Upload</button> &nbsp;
           <button type="reset" mat-raised-button>
               <mat-icon>refresh</mat-icon>
             Reset</button> &nbsp;
