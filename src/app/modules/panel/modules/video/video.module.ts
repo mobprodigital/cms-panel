@@ -5,17 +5,28 @@ import { ViewAllVideosComponent } from './components/view-all-videos/view-all-vi
 import { AddNewVideoCategoryComponent } from './components/add-new-video-category/add-new-video-category.component';
 import { ViewAllVideoCategoriesComponent } from './components/view-all-video-categories/view-all-video-categories.component';
 import { VideoRoutingModule } from './video-routing/video-routing.module';
+import { MatButtonModule, MatCardModule, MatRadioModule, MatInputModule, MatSelectModule, MatIconModule, MatProgressBarModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    VideoRoutingModule
+    VideoRoutingModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    MatProgressBarModule
   ],
   declarations: [
     AddNewVideoComponent,
     ViewAllVideosComponent,
     AddNewVideoCategoryComponent,
-    ViewAllVideoCategoriesComponent
+    ViewAllVideoCategoriesComponent,
   ],
   exports: [VideoRoutingModule]
 })

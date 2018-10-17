@@ -1,3 +1,318 @@
-<p>
-  add-new-video works!
-</p>
+<section class="row">
+  <div class="col-6">
+    <h1 class="page-title">Add new Video</h1>
+  </div>
+  <div class="col-6 text-right">
+    <a mat-raised-button color="primary" routerLink="/panel/portal/all-portals">All Videos</a>
+  </div>
+</section>
+
+
+<form [hidden]="!showMetaDataForm" [formGroup]="addNewVideometaDataForm">
+
+  <!-- basic info -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Video basic Info</mat-card-title>
+      <mat-card-subtitle>* indicated that fields are required</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+      <section class="row">
+
+        <!-- title -->
+        <div class="col-md-4 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="title" placeholder="Video title *">
+            <mat-error *ngIf="addNewVideometaDataForm.controls.title.invalid">
+              <span *ngIf="addNewVideometaDataForm.controls.title.errors.required">Please enter video title</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <!-- language -->
+        <div class="col-md-4 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="language" placeholder="Language">
+          </mat-form-field>
+        </div>
+
+
+
+        <!-- boradcatser name -->
+        <div class="col-md-4 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="broadcasterName" placeholder="Broadcaster name">
+          </mat-form-field>
+        </div>
+
+        <!-- description -->
+        <div class="col-md-12 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <textarea matInput formControlName="description" placeholder="Video description"></textarea>
+          </mat-form-field>
+        </div>
+
+
+      </section>
+    </mat-card-content>
+  </mat-card>
+
+  <br>
+  <br>
+
+  <!-- Video accessibility -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Video accessibility</mat-card-title>
+      <mat-card-subtitle>* indicates that fields are required</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <section class="row">
+
+
+        <!-- Min age required -->
+        <div class="col-md-12 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="minAgeReq" placeholder="Minimum age required *">
+            <mat-error *ngIf="addNewVideometaDataForm.controls.minAgeReq.invalid">
+              <span *ngIf="addNewVideometaDataForm.controls.minAgeReq.errors.required">Please enter minimum age
+                required</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- type -->
+        <div class="col-md-6 col-xs-12">
+          <label class="form-label">Type</label>
+          <mat-radio-group formControlName="type">
+            <mat-radio-button value="all">All</mat-radio-button>
+            <mat-radio-button value="exclusive">Exclusive</mat-radio-button>
+            <mat-radio-button value="orignal">Orignal</mat-radio-button>
+            <mat-radio-button value="newly added">Newly added</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+
+        <!-- Platform -->
+        <div class="col-md-6 col-xs-12">
+          <mat-radio-group formControlName="platform">
+            <label class="form-label">Platform</label>
+            <mat-radio-button value="all">All</mat-radio-button>
+            <mat-radio-button value="mobile app">Mobile App</mat-radio-button>
+            <mat-radio-button value="mobile wap">Mobile Wap</mat-radio-button>
+            <mat-radio-button value="web">Web</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Current Availability -->
+        <div class="col-md-6 col-xs-12">
+          <label class="form-label">Current availability</label>
+          <mat-radio-group formControlName="currentAvailability">
+            <mat-radio-button value="free">Free</mat-radio-button>
+            <mat-radio-button value="paid">Paid</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <!-- adult -->
+        <div class="col-md-6 col-xs-12">
+          <label class="form-label">Adult</label>
+          <mat-radio-group formControlName="adult">
+            <mat-radio-button value="true">Adult</mat-radio-button>
+            <mat-radio-button value="false">Not Adult</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <!-- Download rights -->
+        <div class="col-md-6 col-xs-12">
+          <label class="form-label">Download rights</label>
+          <mat-radio-group formControlName="downloadRights">
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <!-- Download rights -->
+        <div class="col-md-6 col-xs-12">
+          <label class="form-label">International rights</label>
+
+          <mat-radio-group formControlName="internationalRights">
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <br>
+  <!-- meta data -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Meta Data</mat-card-title>
+      <mat-card-subtitle>* indicates that fields are required</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <section class="row">
+        <!-- country -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+
+            <mat-select formControlName="category" placeholder="Category" multiple>
+              <mat-option [value]="Funny">
+                Funny
+              </mat-option>
+              <mat-option [value]="Science">
+                Science
+              </mat-option>
+              <mat-option [value]="Jokes">
+                Jokes
+              </mat-option>
+              <mat-option [value]="News">
+                News
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+        <!-- genere -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="genere" placeholder="genere">
+          </mat-form-field>
+        </div>
+
+        <!-- director -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="director" placeholder="director">
+          </mat-form-field>
+        </div>
+
+        <!-- producer -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="producer" placeholder="producer">
+          </mat-form-field>
+        </div>
+
+        <!-- writer -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="writer" placeholder="writer">
+          </mat-form-field>
+        </div>
+
+        <!-- Music Director -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="musicDirector" placeholder="Music Director">
+          </mat-form-field>
+        </div>
+
+        <!-- Production House -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="productionHouse" placeholder="Production House">
+          </mat-form-field>
+        </div>
+
+        <!-- actor -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="actor" placeholder="Actor">
+          </mat-form-field>
+        </div>
+
+        <!-- singer -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input matInput formControlName="singer" placeholder="Singer">
+          </mat-form-field>
+        </div>
+
+        <!-- country -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+
+            <mat-select formControlName="country" placeholder="country">
+              <mat-option [value]="ind">
+                India
+              </mat-option>
+              <mat-option [value]="us">
+                United States
+              </mat-option>
+              <mat-option [value]="uk">
+                United Kindom
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+
+      </section>
+    </mat-card-content>
+  </mat-card>
+
+  <br>
+  <div class="text-right">
+    <button type="submit" mat-raised-button color="primary">
+      Save and continue
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</form>
+
+<section>
+  <!-- <section [hidden]="!videoUploadForm"> -->
+  <mat-card>
+    <mat-card-content>
+      <form>
+        <section class="row">
+          <!-- video file upload -->
+          <div class="col-md-6 col-sm-6">
+            <section class="upload-section">
+              <div>Upload video file</div>
+              <label class="file-label">
+                <input accept="video/*" type="file" name="videoFile" />
+              </label>
+              <br>
+            </section>
+          </div>
+          <!-- video thumbnail upload -->
+          <div class="col-md-6 col-sm-6">
+            <section class="upload-section">
+              <div>Upload video thumbnail</div>
+              <label class="file-label">
+                <input accept="image/*" type="file" name="videoThumbnail" />
+              </label>
+            </section>
+          </div>
+        </section>
+        <br>
+        <section class="upload-progress-sec">
+          <p>{{uploadProgess}}% completed</p>
+          <mat-progress-bar mode="determinate" [value]="uploadProgess"></mat-progress-bar>
+        </section>
+        <br>
+        <div>
+          <button type="button" mat-raised-button color="primary">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload video</button> &nbsp;
+          <button type="reset" mat-raised-button>
+              <mat-icon>refresh</mat-icon>
+            Reset</button> &nbsp;
+          <button type="button" color="warn" mat-raised-button>
+              <mat-icon>clear</mat-icon>
+            Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</section>

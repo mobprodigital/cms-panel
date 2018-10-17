@@ -11,3 +11,7 @@
 a.mat-raised-button:hover {
   text-decoration: none;
 }
+
+.mat-radio-group .mat-radio-button {
+  margin-right: 11px;
+}
