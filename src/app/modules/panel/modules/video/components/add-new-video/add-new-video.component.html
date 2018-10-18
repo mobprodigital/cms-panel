@@ -8,7 +8,7 @@
 </section>
 
 
-<form [hidden]="!showMetaDataForm" [formGroup]="addNewVideometaDataForm">
+<form [hidden]="!showMetaDataForm" [formGroup]="addNewVideometaDataForm" (ngSubmit)="addNewVideoMetaData()">
 
   <!-- basic info -->
   <mat-card>
@@ -21,7 +21,7 @@
       <section class="row">
 
         <!-- title -->
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <input matInput formControlName="title" placeholder="Video title *">
             <mat-error *ngIf="addNewVideometaDataForm.controls.title.invalid">
@@ -32,7 +32,7 @@
 
 
         <!-- language -->
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <input matInput formControlName="language" placeholder="Language">
           </mat-form-field>
@@ -41,9 +41,31 @@
 
 
         <!-- boradcatser name -->
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <input matInput formControlName="broadcasterName" placeholder="Broadcaster name">
+          </mat-form-field>
+        </div>
+
+        <!-- portal -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+
+            <mat-select formControlName="portalId" placeholder="Portals assigned" multiple>
+              <mat-option value="1">
+                9xm
+              </mat-option>
+              <mat-option value="2">
+                mtv
+              </mat-option>
+              <mat-option value="3">
+                mtnl
+              </mat-option>
+              <mat-option value="4">
+                boogletv
+              </mat-option>
+            </mat-select>
+
           </mat-form-field>
         </div>
 
@@ -163,17 +185,17 @@
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
 
-            <mat-select formControlName="category" placeholder="Category" multiple>
-              <mat-option [value]="Funny">
+            <mat-select formControlName="categoryId" placeholder="Category" multiple>
+              <mat-option value="1">
                 Funny
               </mat-option>
-              <mat-option [value]="Science">
+              <mat-option value="2">
                 Science
               </mat-option>
-              <mat-option [value]="Jokes">
+              <mat-option value="3">
                 Jokes
               </mat-option>
-              <mat-option [value]="News">
+              <mat-option value="4">
                 News
               </mat-option>
             </mat-select>
@@ -239,26 +261,24 @@
         <!-- country -->
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
-
             <mat-select formControlName="country" placeholder="country">
-              <mat-option [value]="ind">
+              <mat-option value="ind">
                 India
               </mat-option>
-              <mat-option [value]="us">
+              <mat-option value="us">
                 United States
               </mat-option>
-              <mat-option [value]="uk">
+              <mat-option value="uk">
                 United Kindom
               </mat-option>
             </mat-select>
-
           </mat-form-field>
         </div>
-
       </section>
     </mat-card-content>
   </mat-card>
-
+  <input type="hidden" formControlName="clientId"/>
+  <input type="hidden" formControlName="videoId"/>
   <br>
   <div class="text-right">
     <button type="submit" mat-raised-button color="primary">
@@ -272,14 +292,14 @@
   <!-- <section [hidden]="!videoUploadForm"> -->
   <mat-card>
     <mat-card-content>
-      <form>
+      <form (ngSubmit)="uploadVideo($event)" #uploadVideoForm>
         <section class="row">
           <!-- video file upload -->
           <div class="col-md-6 col-sm-6">
             <section class="upload-section">
               <p>Upload video file</p>
               <label class="file-label">
-                <input accept="video/*" type="file" name="videoFile" />
+                <input (change)="onVideoChange($event)" accept="video/*" type="file" name="videoFile" />
               </label>
               <br>
             </section>
@@ -299,17 +319,24 @@
           <div>{{uploadProgess}}% completed</div>
           <mat-progress-bar mode="determinate" [value]="uploadProgess"></mat-progress-bar>
         </section>
+        <input type="hidden" [(ngModel)]="videoFileModel.videoId" name="videoId" />
+        <input type="hidden" [(ngModel)]="videoFileModel.videoLength" name="videoLength" />
+        <input type="hidden" [(ngModel)]="videoFileModel.extension" name="extension" />
+        <input type="hidden" [(ngModel)]="videoFileModel.videoMime" name="videoMime" />
         <br>
         <div>
-          <button type="button" mat-raised-button color="primary">
+          <button type="submit" mat-raised-button color="primary">
             <mat-icon>cloud_upload</mat-icon>
-            Start Upload</button> &nbsp;
+            Start Upload
+          </button> &nbsp;
           <button type="reset" mat-raised-button>
-              <mat-icon>refresh</mat-icon>
-            Reset</button> &nbsp;
+            <mat-icon>refresh</mat-icon>
+            Reset
+          </button> &nbsp;
           <button type="button" color="warn" mat-raised-button>
-              <mat-icon>clear</mat-icon>
-            Cancel</button>
+            <mat-icon>clear</mat-icon>
+            Cancel
+          </button>
         </div>
       </form>
     </mat-card-content>

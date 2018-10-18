@@ -18,10 +18,11 @@ export class VideoModel {
     public musicDirector: string = "";
     public productionHouse: string = "";
     public actor: string = "";
-    public category: string[] = [];
+    public categoryId: string[] = [];
     public singer: string = "";
     public country: string = "";
-  videoId: any;
-  clientId: any;
-  videoTags: any;
+    public portalId: string = "";
+    public videoId: any;
+    public clientId: any;
+    public videoTags: any;
 }

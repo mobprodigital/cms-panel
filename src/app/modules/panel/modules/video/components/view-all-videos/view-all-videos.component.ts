@@ -34,7 +34,7 @@ export class ViewAllVideosComponent implements OnInit {
     let videos: VideoModel[] = Array.from({ length: 5 }, (_, i) => {
       let v = new VideoModel();
       v.title = 'title' + (i + 1);
-      v.category = ['funny', 'science', 'sports'];
+      v.categoryId = ['funny', 'science', 'sports'];
       v.portals = ['9xm', 'bsnl', 'discovery'];
       return v;
     })

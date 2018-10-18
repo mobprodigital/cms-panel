@@ -25,20 +25,23 @@ export class VideoService {
     })
   }
 
-  public addNewVideoMetaData(video: VideoModel): Promise<VideoModel> {
+  public addNewVideoMetaData(video: VideoModel): Promise<string> {
     return new Promise((resolve, reject) => {
+
       this._ajaxService.Post({
-        apiName: '',
+        apiName: 'uploadVideoMetaData.php',
         dataToSend: video,
       }).then(resp => {
         if (resp.status) {
-          this.parseVideo([resp.data]).then(video => resolve(video[0]));
+          // this.parseVideo([resp.data]).then(video => resolve(video[0]));
+          resolve(resp.data);
         }
       })
+
     });
 
   }
- 
+
   public editVideoMetaData(video: VideoModel): Promise<VideoModel> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
@@ -52,20 +55,25 @@ export class VideoService {
     });
 
   }
-  
-  public uploadNewVideo(video: VideoModel): Promise<VideoModel> {
+
+  public uploadNewVideo(video: FormData): Promise<string> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: '',
+        apiName: 'uploadVideoFileById.php',
         dataToSend: video,
+        dataType: DataType.FormData
       }).then(resp => {
         if (resp.status) {
-          this.parseVideo([resp.data]).then(video => resolve(video[0]));
+          resolve(resp.msg);  
+        }
+        else{
+          reject(resp.msg);
         }
       })
     });
 
   }
+
   public editVideo(video: VideoModel): Promise<VideoModel> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
@@ -81,7 +89,6 @@ export class VideoService {
   }
 
 
-
   private parseVideo(videoArr: any[]): Promise<VideoModel[]> {
     return new Promise(async (resolve, reject) => {
       let videos: VideoModel[] = [];
@@ -89,7 +96,7 @@ export class VideoService {
         videos = await Promise.all(videoArr.map(async vid => {
           let _video = new VideoModel();
           _video.videoId = vid.videoId;
-          _video.category = vid.categoryId;
+          _video.categoryId = vid.categoryId;
           _video.clientId = vid.clientId;
           _video.portals = vid.portalId;
           _video.title = vid.title;
