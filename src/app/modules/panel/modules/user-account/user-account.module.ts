@@ -27,7 +27,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatTableModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FormsModule,
   ],
   declarations: [UserAccountComponent, CreateUserComponent, AllUsersComponent, CreateClientComponent, AllClientComponent],
   exports: [UserAccountRoutingModule],

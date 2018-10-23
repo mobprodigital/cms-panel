@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +22,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FormsModule
   ],
   declarations: [LoginComponent, ResetPasswordComponent, VerifyEmailComponent],
-  exports: [LoginRoutingModule]
+  exports: [LoginRoutingModule],
 })
 export class LoginModule { }

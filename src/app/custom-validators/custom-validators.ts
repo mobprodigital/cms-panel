@@ -9,7 +9,7 @@ export namespace CustomValidators {
 
     let uintRgx: RegExp = /^[0-9]\d*$/;
 
-    let phoneRgx : RegExp = /^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$/;
+    let phoneRgx: RegExp = /^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$/;
 
     /**
      * Validate that the email is valid
@@ -59,7 +59,24 @@ export namespace CustomValidators {
             return null;
         }
     }
-    
+
+    /**
+     * Validate that the value is float
+     * @param control Control whose value to be validate
+     */
+    export function ValidateFloat(control: AbstractControl) {
+
+        if (!control.value) {
+            return null
+        }
+        else if (!control.value.match(/^-?\d*(\.\d+)?$/)) {
+            return { validateFloat: true };
+        }
+        else {
+            return null;
+        }
+    }
+
     /**
      * Validate that the value is unsigned int
      * @param control Control whose value to be validate
@@ -81,7 +98,7 @@ export namespace CustomValidators {
      * Validate that the phone number is valid
      * @param control Control whose value to be validate
      */
-    export function ValidatePhone(control:AbstractControl){
+    export function ValidatePhone(control: AbstractControl) {
         if (!control.value) {
             return null
         }

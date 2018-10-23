@@ -17,7 +17,7 @@ export class AjaxService {
     return new Promise((resolve, reject) => {
 
       let _requestOptions = new RequestOptions();
-
+      // _requestOptions.withCredentials = true;
       let fullApiPath = baseUrl ? baseUrl + apiName : this._baseUrl + apiName;
       let _dataToSend: any = data;
       if (_dataToSend != null && _dataToSend != undefined) {
@@ -41,7 +41,6 @@ export class AjaxService {
       };
 
       this._http.request(fullApiPath, _requestOptions).subscribe(response => {
-
         
 
         let responseData: any = response.json();

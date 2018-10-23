@@ -29,12 +29,23 @@ export class AllPortalsComponent implements OnInit {
   ngOnInit() {
 
   }
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  public deletePortal(portalId) {
+    this._portalService.deletePortalById(portalId).then(msg => {
+      alert(msg);
+      let indexNumber = this.dataSource.data.findIndex(p => p.portalId == portalId);
+      this.dataSource.data.splice(indexNumber, 1);
+      this.dataSource = new MatTableDataSource<PortalModel>(this.dataSource.data);
+    }).catch(err => alert(err));
+
   }
 
 }

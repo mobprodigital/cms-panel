@@ -5,4 +5,5 @@ export interface AjaxRequestOptions {
     dataToSend?: any;
     dataType?: DataType;
     baseUrl?: string;
+    progressReport?: boolean;
 }

@@ -1,3 +1,5 @@
+import { PortalModel } from "./portal.model";
+
 export class VideoModel {
     public title: string = "";
     public description: string = "";
@@ -11,7 +13,7 @@ export class VideoModel {
     public downloadRights: string = "";
     public internationalRights: string = "";
     public genere: string = "";
-    public portals: string[] = [];
+    public portalId: PortalModel[] = [];
     public director: string = "";
     public producer: string = "";
     public writer: string = "";
@@ -21,8 +23,7 @@ export class VideoModel {
     public categoryId: string[] = [];
     public singer: string = "";
     public country: string = "";
-    public portalId: string = "";
-    public videoId: any;
-    public clientId: any;
-    public videoTags: any;
+    public videoId: string;
+    public clientId: string;
+    public videoTags: string;
 }

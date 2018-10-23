@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-6">
-    <h1 class="page-title">Add new portal</h1>
+    <h1 class="page-title">{{isNewPortal ? 'Create new Portal' : 'Edit Portal'}}</h1>
   </div>
   <div class="col-6 text-right">
     <a routerLink="/panel/portal/all-portals" mat-raised-button color="primary">View All</a>
@@ -31,6 +31,12 @@
             </mat-error>
           </mat-form-field>
         </div>
+        
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <input type="number" formControlName="agreementTenure" matInput placeholder="Agreement tenure">
+          </mat-form-field>
+        </div>
 
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
@@ -41,7 +47,7 @@
               </mat-error>
           </mat-form-field>
         </div>
-
+        <input type="hidden" fomrControlName="portalId">
       </div>
       <br>
       <button type="submit" mat-raised-button color="primary">Submit</button>

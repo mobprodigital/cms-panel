@@ -9,6 +9,10 @@ const portalRoutes: Routes = [
     component: CreatePortalComponent
   },
   {
+    path: 'edit-portal/:id',
+    component: CreatePortalComponent
+  },
+  {
     path: 'all-portals',
     component: AllPortalsComponent
   }

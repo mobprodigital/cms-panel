@@ -7,19 +7,29 @@ import { ViewAllVideoCategoriesComponent } from '../components/view-all-video-ca
 
 const videoRoutes: Routes = [
   {
-    path: 'add-new-video',
+    path: 'add-video',
     component: AddNewVideoComponent
   },
+  
   {
-    path: 'view-all-videos',
+    path: 'edit-video/:id',
+    component: AddNewVideoComponent
+  },
+  
+  {
+    path: 'all-videos',
     component: ViewAllVideosComponent
   },
   {
-    path: 'add-new-video-category',
+    path: 'add-video-category',
     component: AddNewVideoCategoryComponent
   },
   {
-    path: 'view-all-video-categories',
+    path: 'edit-video-category/:id',
+    component: AddNewVideoCategoryComponent
+  },
+  {
+    path: 'all-video-categories',
     component: ViewAllVideoCategoriesComponent
   }
 ]

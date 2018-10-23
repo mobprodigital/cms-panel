@@ -9,14 +9,15 @@ export class PortalService {
 
   constructor(private _ajaxService: AjaxService) { }
 
-  public createPortal(portal: PortalModel) {
+  public addNewPortal(portal: PortalModel): Promise<string> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
         apiName: 'setNewPortal.php',
         dataToSend: portal
       }).then(resp => {
-        if (resp) {
-          this.parsePortalModel([resp.data]).then(newPortal => resolve(newPortal)).catch(err => reject(err));
+        if (resp.status) {
+          // this.parsePortalModel([resp.data]).then(newPortal => resolve(newPortal)).catch(err => reject(err));
+          resolve(resp.msg);
         }
         else {
           reject(resp.msg);
@@ -42,7 +43,57 @@ export class PortalService {
     });
   }
 
+  public getPortalById(portalId: string): Promise<PortalModel> {
+    return new Promise((resolve, reject) => {
 
+      this._ajaxService.Post({
+        apiName: 'getPortalById.php',
+        dataToSend: {
+          portalId: portalId
+        }
+      }).then(resp => {
+        if (resp.status) {
+          this.parsePortalModel([resp.data]).then(p => resolve(p[0]));
+        }
+        else {
+          reject(resp.msg);
+        }
+      })
+    })
+  }
+
+  public editPortalById(portal: PortalModel) {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'editPortals.php',
+        dataToSend: portal
+      }).then(resp => {
+        if (resp.status) {
+          resolve(resp.msg);
+        } else {
+          reject(resp.msg);
+        }
+      }).catch(err => reject(err));
+    });
+  }
+
+  public deletePortalById(portalId): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'deletePortals.php',
+        dataToSend: {
+          portalId: portalId
+        }
+      }).then(resp => {
+        if (resp.status) {
+          resolve(resp.msg);
+        }
+        else {
+          reject(resp.msg);
+        }
+      }).catch(err => reject(err));
+    });
+  }
   private parsePortalModel(portalData: any[]): Promise<PortalModel[]> {
     return new Promise(async (resolve, reject) => {
 
@@ -50,9 +101,11 @@ export class PortalService {
       if (portalData && portalData.length > 0) {
         portalList = await Promise.all(portalData.map(p => {
           let _portal = new PortalModel();
+
           _portal.portalId = p.portalId;
           _portal.email = p.email;
           _portal.portalName = p.portalName;
+          _portal.agreementTenure = parseInt(p.agreementTenure, 10);
           _portal.url = p.url;
 
           return _portal;

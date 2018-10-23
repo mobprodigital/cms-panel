@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ClientModel } from 'src/app/models/client.model';
 import { AjaxService } from "src/app/services/ajax/ajax.service";
+import { CookieService } from 'ngx-cookie-service';
 import { UserAccountModel } from 'src/app/models/user-account.model';
 import { AjaxResponse } from '../ajax/interface/ajax-response.interface';
 
@@ -9,7 +10,8 @@ import { AjaxResponse } from '../ajax/interface/ajax-response.interface';
 })
 export class UserAccountService {
 
-  constructor(private _ajaxService: AjaxService) {
+  constructor(private _ajaxService: AjaxService, private _cookieService : CookieService) {
+    
     this._loggedInUser.firstName = localStorage.getItem('firstName');
     this._loggedInUser.lastName = localStorage.getItem('lastName');
     this._loggedInUser.assignedPortals = JSON.parse(localStorage.getItem('assignedPortals'));
@@ -101,7 +103,7 @@ export class UserAccountService {
           this.parseUserAccountModel([data.data]).then(logInUser => {
             let usr = logInUser[0];
             this._loggedInUser = usr;
-
+            this._cookieService.set('clientId', usr.clientId, 100, '/');
             localStorage.setItem('firstName', usr.firstName);
             localStorage.setItem('lastName', usr.lastName);
             localStorage.setItem('assignedPortals', JSON.stringify(usr.assignedPortals));
