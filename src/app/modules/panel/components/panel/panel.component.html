@@ -36,94 +36,25 @@
       </header>
       <section class="side-nav-main">
         <mat-accordion>
+
+
           <!-- user account -->
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngFor="let menu of menuList">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                User Accounts
+                  <mat-icon class="nav-icon" *ngIf="menu.icon">{{menu.icon}}</mat-icon>
+                 {{menu.name}}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <section>
-              <ul class="main-menu-group">
+              <ul *ngIf="menu.menuItems && menu.menuItems.length > 0" class="main-menu-group">
 
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-client" routerLinkActive="active">Create
-                    Clients</a>
+                <li *ngFor="let mItem of menu.menuItems">
+                  <a class="main-menu-item" [routerLink]="[mItem.path]" routerLinkActive="active">{{mItem.name}}</a>
                 </li>
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/all-clients" routerLinkActive="active">All
-                    Clients</a>
-                </li>
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/create-user" routerLinkActive="active">Create
-                    User</a>
-                </li>
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/user-account/all-users" routerLinkActive="active">All
-                    Users</a>
-                </li>
-
               </ul>
             </section>
           </mat-expansion-panel>
-
-          <!-- portals -->
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Portals
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <section>
-              <ul class="main-menu-group">
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/portal/create-portal" routerLinkActive="active">Create
-                    Portal</a>
-                </li>
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/portal/all-portals" routerLinkActive="active">All
-                    Portals</a>
-                </li>
-
-              </ul>
-            </section>
-          </mat-expansion-panel>
-
-          <!-- video -->
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Video
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <section>
-              <ul class="main-menu-group">
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/video/add-video" routerLinkActive="active">Add New Video</a>
-                </li>
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/video/all-videos" routerLinkActive="active">All Videos</a>
-                </li>
-                
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/video/add-video-category" routerLinkActive="active">New Video Category</a>
-                </li>
-
-                <li>
-                  <a class="main-menu-item" routerLink="/panel/video/all-video-categories" routerLinkActive="active">All Video Categories</a>
-                </li>
-
-              </ul>
-            </section>
-          </mat-expansion-panel>
-
 
         </mat-accordion>
       </section>

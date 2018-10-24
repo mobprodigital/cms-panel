@@ -50,3 +50,9 @@ a.main-menu-item.active:before {
 .toolbar-saparator {
   flex: 1 1 auto;
 }
+
+.mat-icon.nav-icon {
+  font-size: 21px;
+  color: gray;
+  margin-right: 9px;
+}
