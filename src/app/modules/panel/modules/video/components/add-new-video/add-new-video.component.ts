@@ -45,7 +45,7 @@ export class AddNewVideoComponent implements OnInit {
       }
     })
     this.loggedInUser = this._userAccountService.loggedInUser;
-    alert(this.loggedInUser.clientId);
+    
     this.videoFileModel.videoId = '2';
     this.getPortalList();
     this.getVideoCategoryList();

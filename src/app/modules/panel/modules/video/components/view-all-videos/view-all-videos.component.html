@@ -18,7 +18,7 @@
   <!-- Name Column -->
   <ng-container matColumnDef="portals">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Portals </th>
-    <td mat-cell *matCellDef="let row"> {{row.portalId.join()}} </td>
+    <td mat-cell *matCellDef="let row"> <!-- {{row.portalId.map(p => p.portalName).join()}} --> </td>
   </ng-container>
 
   <!-- Color Column -->

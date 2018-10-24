@@ -3,8 +3,8 @@
     <h1 class="page-title">All Users</h1>
   </div>
   <div class="col-6 text-right">
-    <button type="button" mat-raised-button color="primary">Add new</button>
-  </div>  
+    <a type="button" mat-raised-button color="primary" [routerLink]="['/panel/user-account/create-user']">Add New</a>
+  </div>
 </div>
 
 <table mat-table [dataSource]="dataSource" matSort>
@@ -26,7 +26,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
     <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
   </ng-container>
-  
+
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
     <td mat-cell *matCellDef="let row"> <a href="javascript:void(0)">Edit</a> </td>

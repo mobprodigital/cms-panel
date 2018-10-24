@@ -35,6 +35,7 @@ export class ViewAllVideosComponent implements OnInit {
 
   public getAllVideos() {
     this._videoService.getAllVideosByClientId(this.loggedInUser.loggedInUser.clientId).then(vids => {
+      console.log(vids);
       this.dataSource = new MatTableDataSource(vids);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
