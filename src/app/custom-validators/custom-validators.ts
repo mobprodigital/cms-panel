@@ -109,4 +109,13 @@ export namespace CustomValidators {
             return null;
         }
     }
+
+    export function CollectionLength(min: number) {
+        return (c: AbstractControl): { [key: string]: any } => {
+            if (c.value.length >= min)
+                return null;
+
+            return { 'collectionLength': { valid: false } };
+        }
+    }
 }

@@ -1,3 +1,55 @@
-<p>
-  all-text works!
-</p>
+<div class="row">
+    <div class="col-6">
+      <h1 class="page-title">All Texts</h1>
+    </div>
+    <div class="col-6 text-right">
+      <a routerLink="/panel/text/add-text" mat-raised-button color="primary">Add new</a>
+    </div>
+  </div>
+  
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+  
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="language">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Language </th>
+        <td mat-cell *matCellDef="let row"> {{row.language}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+        <td mat-cell *matCellDef="let row"> {{row.author}} </td>
+      </ng-container>
+  
+  
+  
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+  
+          <a matTooltip="Edit portal" mat-icon-button color="primary" [routerLink]="['/panel/text/edit-text', row.textId]">
+            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+          </a> &nbsp;
+          <a matTooltip="Delete portal" (click)="deleteText(row.textId)" mat-icon-button color="warn">
+            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+          </a> 
+  
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  

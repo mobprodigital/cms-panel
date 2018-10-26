@@ -36,10 +36,10 @@ export class PanelComponent implements OnInit {
         new NavMenuItem('All Video Categories', '/panel/video/all-video-categories'),
       ], 'video_library'),
       new NavMenu('Text', [
-        new NavMenuItem('Add Text', '/panel/video/add-video'),
-        new NavMenuItem('All Texts', '/panel/video/all-videos'),
-        new NavMenuItem('Add Text Category', '/panel/video/add-video-category'),
-        new NavMenuItem('All Text Categories', '/panel/video/all-video-categories'),
+        new NavMenuItem('Add Text', '/panel/text/add-text'),
+        new NavMenuItem('All Texts', '/panel/text/all-texts'),
+        new NavMenuItem('Add Text Category', '/panel/text/add-text-category'),
+        new NavMenuItem('All Text Categories', '/panel/text/all-text-categories'),
       ], 'text_fields'),
     ])
   }

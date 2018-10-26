@@ -17,7 +17,10 @@ export class AjaxService {
     return new Promise((resolve, reject) => {
 
       let _requestOptions = new RequestOptions();
-      // _requestOptions.withCredentials = true;
+
+
+      _requestOptions.withCredentials = true;
+      
       let fullApiPath = baseUrl ? baseUrl + apiName : this._baseUrl + apiName;
       let _dataToSend: any = data;
       if (_dataToSend != null && _dataToSend != undefined) {
@@ -66,7 +69,6 @@ export class AjaxService {
         _ajaxResponse.httpInfo.statusText = err.statusText;
         _ajaxResponse.httpInfo.url = err.url;
 
-        console.log('Status code error: ', _ajaxResponse.httpInfo);
 
         if (isDevMode) {
 
@@ -75,7 +77,7 @@ export class AjaxService {
 
         }
 
-        reject(_ajaxResponse.httpInfo.statusText);
+        reject('Server error : ' + _ajaxResponse.httpInfo.statusText);
       });
     });
   }

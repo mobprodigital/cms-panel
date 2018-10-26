@@ -31,9 +31,6 @@ export class LoginComponent implements OnInit {
       this._userAccountService.login(this.loginForm.value['email'], this.loginForm.value['password']).then(resp => {
         this.loginFail = false;
         this.showProgressBar = false;
-
-        
-
       }).catch(err => {
         this.loginErrMsg = err;
         this.loginFail = true;

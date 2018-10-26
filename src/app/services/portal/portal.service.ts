@@ -7,12 +7,14 @@ import { AjaxService } from '../ajax/ajax.service';
 })
 export class PortalService {
 
+  private apiPrefix : string = 'portal/';
+
   constructor(private _ajaxService: AjaxService) { }
 
   public addNewPortal(portal: PortalModel): Promise<string> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: 'setNewPortal.php',
+        apiName: this.apiPrefix + 'setNewPortal.php',
         dataToSend: portal
       }).then(resp => {
         if (resp.status) {
@@ -29,7 +31,7 @@ export class PortalService {
   public getAllPortals(): Promise<PortalModel[]> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: 'getPortalListing.php',
+        apiName: this.apiPrefix + 'getPortalListing.php',
       }).then(data => {
         if (data.status) {
           this.parsePortalModel(data.data).then(portalList => {
@@ -47,7 +49,7 @@ export class PortalService {
     return new Promise((resolve, reject) => {
 
       this._ajaxService.Post({
-        apiName: 'getPortalById.php',
+        apiName: this.apiPrefix + 'getPortalById.php',
         dataToSend: {
           portalId: portalId
         }
@@ -65,7 +67,7 @@ export class PortalService {
   public editPortalById(portal: PortalModel) {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: 'editPortals.php',
+        apiName: this.apiPrefix + 'editPortals.php',
         dataToSend: portal
       }).then(resp => {
         if (resp.status) {
@@ -80,7 +82,7 @@ export class PortalService {
   public deletePortalById(portalId): Promise<string> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: 'deletePortals.php',
+        apiName: this.apiPrefix + 'deletePortals.php',
         dataToSend: {
           portalId: portalId
         }

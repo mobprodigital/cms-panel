@@ -14,6 +14,7 @@ export class AddNewVideoCategoryComponent implements OnInit {
   public isNewCategory: boolean = true;
   public categoryForm: FormGroup;
   public categoryId: string = '';
+  
   constructor(private _videoService: VideoService, private route: ActivatedRoute) {
     this.route.paramMap.pipe().subscribe(obs => {
       this.categoryId = obs.get('id');

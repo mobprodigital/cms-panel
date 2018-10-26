@@ -20,6 +20,10 @@ const panelRoutes: Routes = [
       {
         path: 'portal',
         loadChildren: '../modules/portals/portals.module#PortalsModule'
+      },
+      {
+        path: 'text',
+        loadChildren: '../modules/text/text.module#TextModule'
       }
 
     ]

@@ -56,3 +56,16 @@ label.form-label {
   font-size: 10px;
   color: #8e8e8e;
 }
+
+.cat-thumbnail {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.cat-thumbnail>img {
+  max-width: 100%;
+}
+label.btn-label{
+  margin: 0;
+  cursor: pointer;
+}

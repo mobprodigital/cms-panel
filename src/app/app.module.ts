@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpModule } from '@angular/http';
-import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +16,6 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
