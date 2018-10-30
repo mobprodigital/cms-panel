@@ -9,7 +9,7 @@ import { AjaxRequestOptions } from './interface/ajax-request-options.interface';
 })
 export class AjaxService {
 
-  private _baseUrl: string = 'http://192.168.0.7/boogletv/api/dashboard/';
+  private _baseUrl: string = 'http://192.168.0.8/boogletv/api/dashboard/';
 
   constructor(private _http: Http) { }
 

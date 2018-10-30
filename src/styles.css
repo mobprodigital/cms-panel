@@ -65,7 +65,12 @@ label.form-label {
 .cat-thumbnail>img {
   max-width: 100%;
 }
-label.btn-label{
+
+label.btn-label {
   margin: 0;
   cursor: pointer;
+}
+
+.color-white {
+  color: #ffffff;
 }

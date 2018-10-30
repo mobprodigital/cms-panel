@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
     {
@@ -9,6 +10,7 @@ const routes: Routes = [
     },
     {
         path: 'panel',
+        canActivate : [AuthGuard],
         loadChildren: '../modules/panel/panel.module#PanelModule',
     },
     {

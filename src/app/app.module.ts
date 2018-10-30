@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpModule } from '@angular/http';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +18,7 @@ import { HttpModule } from '@angular/http';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [AuthService, AuthGuard]
 })
 export class AppModule { }
