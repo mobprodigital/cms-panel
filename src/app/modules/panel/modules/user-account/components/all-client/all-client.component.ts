@@ -22,7 +22,7 @@ export class AllClientComponent implements OnInit {
 
 
   ngOnInit() {
-   
+
   }
 
   public applyFilter(filterValue: string) {
@@ -42,6 +42,21 @@ export class AllClientComponent implements OnInit {
     })
   }
 
+  public deleteClient(clientId) {
+    if (clientId) {
+      this._userAccountService.deleteClient(clientId).then(msg => {
+
+        let indexNumber = this.dataSource.data.findIndex(p => p.clientId == clientId);
+        this.dataSource.data.splice(indexNumber, 1);
+        this.dataSource = new MatTableDataSource<ClientModel>(this.dataSource.data);
+
+        alert(msg);
+      }).catch(err => alert(err));
+    }
+    else{
+      alert('err client id : ' + clientId);
+    }
+  }
 
 
 }

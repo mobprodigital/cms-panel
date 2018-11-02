@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-6">
-    <h1 class="page-title">Create New Client</h1>
+    <h1 class="page-title">{{isNewClient ? 'Create New Client' : 'Edit Client'}}</h1>
   </div>
   <div class="col-6 text-right">
     <a type="button" mat-raised-button color="primary" [routerLink]="['/panel/user-account/all-clients']">All Clients</a>
@@ -17,12 +17,12 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form (ngSubmit)="createNewClient()" [formGroup]="createClientForm">
+    <form (ngSubmit)="createNewClient()" [formGroup]="clientForm">
       <div class="row">
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <input formControlName="clientName" matInput placeholder="Client Name *">
-            <mat-error *ngIf="createClientForm.controls.clientName.invalid">
+            <mat-error *ngIf="clientForm.controls.clientName.invalid">
               <span>Please enter client name</span>
             </mat-error>
           </mat-form-field>
@@ -31,9 +31,9 @@
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <input formControlName="email" type="email" matInput placeholder="Email *">
-            <mat-error *ngIf="createClientForm.controls.email.invalid">
-              <span *ngIf="createClientForm.controls.email.errors.required">Please enter email</span>
-              <span *ngIf="createClientForm.controls.email.errors.validateEmail">Please enter valid email</span>
+            <mat-error *ngIf="clientForm.controls.email.invalid">
+              <span *ngIf="clientForm.controls.email.errors.required">Please enter email</span>
+              <span *ngIf="clientForm.controls.email.errors.validateEmail">Please enter valid email</span>
             </mat-error>
           </mat-form-field>
         </div>
@@ -41,9 +41,9 @@
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <input formControlName="phone" type="tel" matInput placeholder="Phone *">
-            <mat-error *ngIf="createClientForm.controls.phone.invalid">
-              <span *ngIf="createClientForm.controls.phone.errors.required">Please enter phone number</span>
-              <span *ngIf="createClientForm.controls.phone.errors.validatePhone">Please enter valid phone number</span>
+            <mat-error *ngIf="clientForm.controls.phone.invalid">
+              <span *ngIf="clientForm.controls.phone.errors.required">Please enter phone number</span>
+              <span *ngIf="clientForm.controls.phone.errors.validatePhone">Please enter valid phone number</span>
             </mat-error>
           </mat-form-field>
         </div>
@@ -52,7 +52,7 @@
           <mat-form-field class="form-field-block">
             <input formControlName="domain" type="url" matInput placeholder="Url/Domain">
             <mat-error>
-              <span *ngIf="createClientForm.controls.domain.invalid && createClientForm.controls.domain.errors.validateUrl">Please
+              <span *ngIf="clientForm.controls.domain.invalid && clientForm.controls.domain.errors.validateUrl">Please
                 enter valid url</span>
             </mat-error>
           </mat-form-field>
@@ -69,7 +69,7 @@
           <mat-form-field class="form-field-block">
             <input formControlName="agreementTenure" type="number" matInput placeholder="Agreement Tenure (in months)">
             <mat-error>
-              <span *ngIf="createClientForm.controls.agreementTenure.invalid && createClientForm.controls.agreementTenure.errors.validateUint">Agreement
+              <span *ngIf="clientForm.controls.agreementTenure.invalid && clientForm.controls.agreementTenure.errors.validateUint">Agreement
                 tenure should be in numbers</span>
             </mat-error>
           </mat-form-field>
@@ -84,36 +84,31 @@
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
             <mat-select formControlName="assignedPortals" placeholder="Portal Assigned *" multiple>
-              <mat-option value="1">
-                9xm
-              </mat-option>
-              <mat-option value="2">
-                BoogleTv
-              </mat-option>
-              <mat-option value="3">
-                Hungama
+              <mat-option *ngFor="let p of portalList" [value]="p.portalId">
+                {{p.portalName}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="createClientForm.controls.assignedPortals.invalid">
+            <mat-error *ngIf="clientForm.controls.assignedPortals.invalid">
               <span>Please select portals</span>
             </mat-error>
           </mat-form-field>
-          {{createClientForm.controls.assignedPortals.value}}
+
         </div>
 
         <div class="col-md-12">
           <mat-form-field class="form-field-block">
             <textarea formControlName="address" matInput placeholder="Address *"></textarea>
-            <mat-error *ngIf="createClientForm.controls.address.invalid">
-              <span *ngIf="createClientForm.controls.address.errors.required">Please enter address</span>
+            <mat-error *ngIf="clientForm.controls.address.invalid">
+              <span *ngIf="clientForm.controls.address.errors.required">Please enter address</span>
             </mat-error>
           </mat-form-field>
         </div>
       </div>
       <br>
       <br>
+      <input type="hidden" formControlName="clientId" />
       <div>
-        <button type="submit" mat-raised-button color="primary">Create Client</button>
+        <button type="submit" mat-raised-button color="primary">{{ isNewClient ? 'Create Client' : 'Update Client'}}</button>
       </div>
     </form>
   </mat-card-content>
@@ -121,59 +116,3 @@
 
 </mat-card>
 
-<mat-card [hidden]="!showUserForm">
-  <!-- super admin info -->
-  <mat-card-header>
-    <mat-card-title>Super Admin Info</mat-card-title>
-    <mat-card-subtitle>Fields marked as * are required</mat-card-subtitle>
-  </mat-card-header>
-
-  <mat-card-content>
-    <form (ngSubmit)="createNewUser()" [formGroup]="createUserForm">
-      <div class="row">
-        <!-- first name -->
-        <div class="col-md-6 col-xs-12">
-          <mat-form-field class="form-field-block">
-            <input matInput formControlName="firstName" placeholder="First Name *">
-            <mat-error *ngIf="createUserForm.controls.firstName.invalid">
-              <span *ngIf="createUserForm.controls.firstName.errors.required">Please enter client name</span>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <!-- last name -->
-        <div class="col-md-6 col-xs-12">
-          <mat-form-field class="form-field-block">
-            <input matInput formControlName="lastName" placeholder="Last Name">
-          </mat-form-field>
-        </div>
-        <!-- Email -->
-        <div class="col-md-6 col-xs-12">
-          <mat-form-field class="form-field-block">
-            <input matInput formControlName="email" type="email" placeholder="Email *">
-            <mat-error *ngIf="createUserForm.controls.email.invalid">
-              <span *ngIf="createUserForm.controls.email.errors.required">Please enter your email</span>
-              <span *ngIf="createUserForm.controls.email.errors.validateEmail">Please enter valid email</span>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <!-- Phone -->
-        <div class="col-md-6 col-xs-12">
-          <mat-form-field class="form-field-block">
-            <input formControlName="phone" matInput type="tel" placeholder="Phone">
-            <mat-error *ngIf="createUserForm.controls.phone.invalid">
-              <span *ngIf="createUserForm.controls.phone.errors.validatePhone">Please enter valid phone number</span>
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <input type="hidden" formControlName="role" />
-        <input type="hidden" formControlName="clientId" />
-        <input type="hidden" formControlName="assignedPortals" />
-
-        <div class="col-md-12">
-          <button type="submit" mat-raised-button color="primary">Create Super Admin</button>
-        </div>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>

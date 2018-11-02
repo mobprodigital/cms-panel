@@ -3,7 +3,7 @@
       <h1 class="page-title">All Video Categories</h1>
     </div>
     <div class="col-6 text-right">
-      <a routerLink="/panel/portal/add-video-category" mat-raised-button color="primary">Add new</a>
+      <a routerLink="/panel/video/add-video-category" mat-raised-button color="primary">Add new</a>
     </div>
   </div>
   
@@ -27,9 +27,9 @@
           <a matTooltip="Edit category" mat-icon-button color="primary" [routerLink]="['/panel/video/edit-video-category', row.categoryId]">
             <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
           </a> &nbsp;
-          <a matTooltip="Delete category" (click)="deleteCategory(row.categoryId)" mat-icon-button color="warn">
+          <!-- <a matTooltip="Delete category" (click)="deleteCategory(row.categoryId)" mat-icon-button color="warn">
             <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-          </a> 
+          </a>  -->
   
         </td>
       </ng-container>

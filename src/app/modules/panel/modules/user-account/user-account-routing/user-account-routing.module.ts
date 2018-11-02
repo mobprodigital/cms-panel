@@ -4,6 +4,8 @@ import { CreateUserComponent } from '../components/create-user/create-user.compo
 import { AllUsersComponent } from '../components/all-users/all-users.component';
 import { CreateClientComponent } from '../components/create-client/create-client.component';
 import { AllClientComponent } from '../components/all-client/all-client.component';
+import { CreateSuperAdminComponent } from '../components/create-super-admin/create-super-admin.component';
+import { AllSuperAdminsComponent } from '../components/all-super-admins/all-super-admins.component';
 
 const userAccountRoutes: Routes = [
   {
@@ -11,8 +13,28 @@ const userAccountRoutes: Routes = [
     component: CreateClientComponent
   },
   {
+    path: 'edit-client/:id',
+    component: CreateClientComponent
+  },
+  {
     path: 'all-clients',
     component: AllClientComponent
+  },
+  {
+    path : 'create-superadmin',
+    component : CreateSuperAdminComponent
+  },
+  {
+    path : 'create-superadmin/:clientId',
+    component : CreateSuperAdminComponent
+  },
+  {
+    path : 'edit-superadmin/:clientId/:userId',
+    component : CreateSuperAdminComponent
+  },
+  {
+    path : 'all-superadmins',
+    component : AllSuperAdminsComponent
   },
   {
     path: 'create-user',

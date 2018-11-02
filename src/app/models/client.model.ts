@@ -5,8 +5,8 @@ export class ClientModel {
     public phone: string = "";
     public skypeId: string = "";
     public agreementTenure: number = 0;
-    public assignedPortals: number[] = [];
+    public billingCycle: string = '';
+    public assignedPortals: string[] = [];
     public address: string = "";
     public domain: string = "";
-
 }

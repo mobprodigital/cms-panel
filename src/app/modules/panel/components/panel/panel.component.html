@@ -1,6 +1,6 @@
 <mat-toolbar class="container-fluid" color="primary">
   <mat-toolbar-row>
-    <span class="panel-name">CMS Panel</span>
+    <span class="panel-name">{{ loggedInUser.clientInfo.clientName ? loggedInUser.clientInfo.clientName :  'JMM Panel'}}</span>
     <button type="button" mat-icon-button color="primary" (click)="drawer.toggle()">
       <mat-icon class="color-white">dehaze</mat-icon>
     </button>
@@ -8,7 +8,7 @@
     <span class="">
 
       <button mat-button [matMenuTriggerFor]="userOptions">
-        <mat-icon>arrow_drop_down</mat-icon> Gyan Parkash
+        <mat-icon>arrow_drop_down</mat-icon> {{loggedInUser.fullName}}
       </button>
       <mat-menu #userOptions="matMenu">
 
@@ -18,7 +18,7 @@
         <button mat-menu-item>
           <i class="fas fa-gear"></i> Setting</button>
 
-        <button mat-menu-item>
+        <button (click)="logOut()" mat-menu-item>
           <i class="fas fa-sign-out-alt"></i> Logout</button>
 
       </mat-menu>
@@ -32,7 +32,7 @@
   <mat-drawer opened #drawer mode="side">
     <aside class="main-side-nav">
       <header class="side-nav-header">
-        Gyan Parkash
+         <small>Logged in as {{loggedInUser.role.roleName}}  </small>
       </header>
       <section class="side-nav-main">
         <mat-accordion>

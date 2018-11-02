@@ -11,6 +11,8 @@ export namespace CustomValidators {
 
     let phoneRgx: RegExp = /^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$/;
 
+    let alphaNumericWithoutSpace = /[^a-zA-Z]/;
+
     /**
      * Validate that the email is valid
      * @param control Control whose value to be validate
@@ -110,6 +112,71 @@ export namespace CustomValidators {
         }
     }
 
+    /**
+     * Validate that if value if alphabets without space
+     * @param control Control whose value to be validate
+    */
+    export function AlphabetsWithOutSpace(control: AbstractControl) {
+        if (!control.value) {
+            return null;
+        }
+        else if ((/[^a-zA-Z]/g.test(control.value))) {
+            return { validateAlphabetsWithoutSpace: true };
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Validate that if value if alphabets with space
+     * @param control Control whose value to be validate
+    */
+    export function AlphabetsWithSpace(control: AbstractControl) {
+        if (!control.value) {
+            return null;
+        }
+        else if ((/[^a-zA-Z\s]/g.test(control.value))) {
+            return { validateAlphabetsWithSpace: true };
+        }
+        else {
+            return null;
+        }
+    }
+
+
+    /**
+     * Validate that if value if alphanumeric with space
+     * @param control Control whose value to be validate
+    */
+    export function AlphaNumericWithSpace(control: AbstractControl) {
+        if (!control.value) {
+            return null;
+        }
+        else if (!(/^[a-zA-Z0-9\s]+$/.test(control.value))) {
+            return { validateAlphaNumericWithSpace: true };
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
+     * Validate that if value if alphanumeric without space
+     * @param control Control whose value to be validate
+    */
+    export function AlphaNumericWithoutSpace(control: AbstractControl) {
+        if (!control.value) {
+            return null;
+        }
+        else if (!(/^[a-zA-Z0-9]+$/.test(control.value))) {
+            return { validateAlphaNumericWithoutSpace: true };
+        }
+        else {
+            return null;
+        }
+    }
+
     export function CollectionLength(min: number) {
         return (c: AbstractControl): { [key: string]: any } => {
             if (c.value.length >= min)
@@ -118,4 +185,6 @@ export namespace CustomValidators {
             return { 'collectionLength': { valid: false } };
         }
     }
+
+
 }

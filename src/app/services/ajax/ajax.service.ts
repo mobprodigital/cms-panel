@@ -3,6 +3,7 @@ import { Http, RequestOptions, RequestMethod } from '@angular/http';
 import { DataType } from './enum/data-type.enum';
 import { AjaxResponse } from './interface/ajax-response.interface';
 import { AjaxRequestOptions } from './interface/ajax-request-options.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AjaxService {
 
   private _baseUrl: string = 'http://192.168.0.8/boogletv/api/dashboard/';
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http, private _router: Router) { }
 
   private Send(apiName: string, requestMethod: RequestMethod, data?: any, dataType: DataType = DataType.RowData, baseUrl?: string): Promise<AjaxResponse> {
     return new Promise((resolve, reject) => {
@@ -20,7 +21,7 @@ export class AjaxService {
 
 
       _requestOptions.withCredentials = true;
-      
+
       let fullApiPath = baseUrl ? baseUrl + apiName : this._baseUrl + apiName;
       let _dataToSend: any = data;
       if (_dataToSend != null && _dataToSend != undefined) {
@@ -44,24 +45,26 @@ export class AjaxService {
       };
 
       this._http.request(fullApiPath, _requestOptions).subscribe(response => {
-        
 
-        let responseData: any = response.json();
+        try {
+          let responseData: any = response.json();
 
-        // feed api data
-        _ajaxResponse.data = responseData.data;
-        _ajaxResponse.msg = responseData.message;
-        _ajaxResponse.status = responseData.status === true;
+          // feed api data
+          _ajaxResponse.data = responseData.data;
+          _ajaxResponse.msg = responseData.message;
+          _ajaxResponse.status = responseData.status === true;
 
-
-        //feed http request data
-        _ajaxResponse.httpInfo.ok = response.ok;
-        _ajaxResponse.httpInfo.status = response.status;
-        _ajaxResponse.httpInfo.statusText = response.statusText;
-        _ajaxResponse.httpInfo.url = response.url;
-        console.log('Status code success: ', _ajaxResponse.httpInfo);
-
-        resolve(_ajaxResponse);
+          //feed http request data
+          _ajaxResponse.httpInfo.ok = response.ok;
+          _ajaxResponse.httpInfo.status = response.status;
+          _ajaxResponse.httpInfo.statusText = response.statusText;
+          _ajaxResponse.httpInfo.url = response.url;
+          console.log('Status code success: ', _ajaxResponse.httpInfo);
+          resolve(_ajaxResponse);
+        }
+        catch (err) {
+          reject(err.message);
+        }
       }, (err: Response) => {
         _ajaxResponse.status = false;
         _ajaxResponse.httpInfo.ok = err.ok;
@@ -77,7 +80,25 @@ export class AjaxService {
 
         }
 
-        reject('Server error : ' + _ajaxResponse.httpInfo.statusText);
+        switch (_ajaxResponse.httpInfo.status) {
+          case 401:
+            localStorage.clear();
+            this._router.navigate(['/login/login']);
+            break;
+          case 403:
+            reject('You are not authorized to perform this action');
+            break;
+          case 404:
+            reject('Resource not found . Error code : ' + _ajaxResponse.httpInfo.status);
+            break;
+          case 500:
+            reject('Internal Server Error');
+            break;
+          default:
+            reject('Something gone wrong. Error code : ' + _ajaxResponse.httpInfo.status);
+            break;
+        }
+
       });
     });
   }

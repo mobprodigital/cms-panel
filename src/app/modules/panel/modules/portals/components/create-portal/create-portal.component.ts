@@ -4,6 +4,7 @@ import { PortalService } from 'src/app/services/portal/portal.service';
 import { PortalModel } from 'src/app/models/portal.model';
 import { CustomValidators } from 'src/app/custom-validators/custom-validators';
 import { ActivatedRoute } from '@angular/router';
+import { ContentTypeModel } from 'src/app/models/content-type.model';
 
 @Component({
   selector: 'app-create-portal',
@@ -16,7 +17,12 @@ export class CreatePortalComponent implements OnInit {
   public isNewPortal: boolean = true;
   public portal: PortalModel = new PortalModel();
   public portalId: string = '';
-
+  public contentTypeList: ContentTypeModel[] = [
+    new ContentTypeModel('1', 'Audio'),
+    new ContentTypeModel('2', 'Video'),
+    new ContentTypeModel('3', 'Image'),
+    new ContentTypeModel('4', 'Stories')
+  ]
   constructor(private _portalService: PortalService, private route: ActivatedRoute) {
     this.route.paramMap.pipe().subscribe(obs => {
       this.portalId = obs.get('id');
@@ -28,12 +34,15 @@ export class CreatePortalComponent implements OnInit {
 
   private getPortalById(portalId: string) {
     this._portalService.getPortalById(portalId).then(p => {
-
-      this.createPortalForm.controls['portalId'].setValue(p.portalId);
-      this.createPortalForm.controls['url'].setValue(p.url);
-      this.createPortalForm.controls['portalName'].setValue(p.portalName);
-      this.createPortalForm.controls['email'].setValue(p.email);
-      this.createPortalForm.controls['agreementTenure'].setValue(p.agreementTenure);
+      console.log(p);
+      this.createPortalForm.reset({
+        portalName : p.portalName,
+        portalId : p.portalId,
+        contentType : p.contentType,
+        url : p.url,
+        email : p.email,
+        agreementTenure : p.agreementTenure,
+      });
 
     }).catch(err => alert(err));
   }
@@ -42,17 +51,20 @@ export class CreatePortalComponent implements OnInit {
     this.createPortalForm = new FormGroup({
       portalName: new FormControl('', [Validators.required]),
       portalId: new FormControl(''),
+      contentType: new FormControl('', [Validators.required]),
       url: new FormControl('', [Validators.required, CustomValidators.ValidateUrl]),
       email: new FormControl('', [Validators.required, CustomValidators.ValidateEmail]),
       agreementTenure: new FormControl(''),
     });
 
     if (this.portalId) {
-      this.getPortalById(this.portalId);
+      this.getPortalById(this.portalId)
     }
   }
 
   public createPortal() {
+    console.log(this.createPortalForm.value);
+    
     if (this.createPortalForm.valid) {
       let p: PortalModel = this.createPortalForm.value;
       if (this.isNewPortal) {
@@ -64,11 +76,16 @@ export class CreatePortalComponent implements OnInit {
       else {
         this._portalService.editPortalById(p).then(msg => {
           alert(msg);
-          
+
         }).catch(err => alert('Failed : ' + err));
       }
 
     }
   }
+
+  public compareCtFun(c1 : any, c2 : ContentTypeModel){
+    return c1 == c2.contentTypeId;
+  }
+  
 
 }

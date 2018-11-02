@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-6">
-    <h1 class="page-title">All Clients</h1>
+    <h1 class="page-title">All Super Admins</h1>
   </div>
   <div class="col-6 text-right">
-    <a type="button" mat-raised-button color="primary" [routerLink]="['/panel/user-account/create-client']">Add New</a>
+    <a routerLink="/panel/user-account/create-superadmin" mat-raised-button color="primary">Add new</a>
   </div>
 </div>
 
@@ -11,37 +11,52 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
 </mat-form-field>
 
-<div>
+
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-select (selectionChange)="getAllSuperAdmins()" [(value)]="selectedClientId" placeholder="Choose a client">
+        <mat-option *ngFor="let client of clientList" [value]="client.clientId">
+          {{client.clientName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<br>
+<br>
+
+<section *ngIf="dataSource">
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- Client Name -->
-    <ng-container matColumnDef="clientName">
+    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.clientName}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.fullName}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
       <td mat-cell *matCellDef="let row"> {{row.email}} </td>
     </ng-container>
 
-    <!-- Color Column -->
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
       <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
     </ng-container>
 
+
+
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row">
 
-        <a matTooltip="Edit portal" mat-icon-button color="primary" [routerLink]="['/panel/user-account/edit-client', row.clientId]">
+        <a matTooltip="Edit portal" mat-icon-button color="primary" [routerLink]="['/panel/user-account/edit-superadmin',row.clientId,row.userId]">
           <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
         </a> &nbsp;
-        <!-- <a matTooltip="Delete portal" (click)="deleteClient(row.clientId)" mat-icon-button color="warn">
+        <a matTooltip="Delete portal" (click)="deleteSuperAdmin(row.clientId, row.userId)" mat-icon-button color="warn">
           <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-        </a> -->
+        </a>
 
       </td>
     </ng-container>
@@ -52,4 +67,10 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-</div>
+</section>
+
+<mat-card *ngIf="!dataSource">
+  <mat-card-content>
+    No users found
+  </mat-card-content>
+</mat-card>

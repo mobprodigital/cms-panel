@@ -12,6 +12,7 @@ import {
   MatMenuModule,
   MatProgressBarModule
 } from '@angular/material';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,6 +27,6 @@ import {
     MatMenuModule,
     MatProgressBarModule
   ],
-  declarations: [PanelComponent],
+  declarations: [PanelComponent, DashboardComponent],
 })
 export class PanelModule { }

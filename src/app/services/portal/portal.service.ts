@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PortalModel } from 'src/app/models/portal.model';
 import { AjaxService } from '../ajax/ajax.service';
+import { ContentTypeModel } from 'src/app/models/content-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,26 @@ export class PortalService {
     });
   }
 
+  public getAllPortalsByClientId(clientId : string, userId : string): Promise<PortalModel[]> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: this.apiPrefix + 'getPortalListingByClientId.php',
+        dataToSend : {
+          clientId : clientId,
+          userId : userId
+        }
+      }).then(data => {
+        if (data.status) {
+          this.parsePortalModel(data.data).then(portalList => {
+            resolve(portalList);
+          })
+        }
+        else {
+          reject(data.msg);
+        }
+      }).catch(err => reject(err));
+    });
+  }
   public getAllPortals(): Promise<PortalModel[]> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
@@ -44,6 +65,8 @@ export class PortalService {
       }).catch(err => reject(err));
     });
   }
+
+
 
   public getPortalById(portalId: string): Promise<PortalModel> {
     return new Promise((resolve, reject) => {
@@ -109,7 +132,7 @@ export class PortalService {
           _portal.portalName = p.portalName;
           _portal.agreementTenure = parseInt(p.agreementTenure, 10);
           _portal.url = p.url;
-
+          _portal.contentType = p.contentType.map(ct => new ContentTypeModel(ct.contentTypeId, ct.contentTypeName))
           return _portal;
         }));
       }

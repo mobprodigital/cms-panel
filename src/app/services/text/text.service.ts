@@ -89,11 +89,14 @@ export class TextService {
     });
   }
 
-  public getAllTexts(): Promise<TextModel[]> {
+  public getAllTexts(clientId : string): Promise<TextModel[]> {
 
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: this.prefix + 'getTextsListingByClientId.php'
+        apiName: this.prefix + 'getTextsListingByClientId.php',
+        dataToSend : {
+          clientId : clientId
+        }
       }).then(resp => {
         if (resp.status) {
           this.parseTextModel(resp.data).then(text => resolve(text)).catch(err => reject(err));

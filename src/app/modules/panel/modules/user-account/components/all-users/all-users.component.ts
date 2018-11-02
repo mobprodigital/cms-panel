@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserAccountModel } from 'src/app/models/user-account.model';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { UserAccountService } from 'src/app/services/user-account/user-account.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-all-users',
@@ -16,13 +17,17 @@ export class AllUsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public userList: UserAccountModel[] = [];
+  public loggedInUser: UserAccountModel = new UserAccountModel();
+  
 
-  constructor(private _userAccountService: UserAccountService) { 
+  constructor(private _userAccountService: UserAccountService, private authService: AuthService) {
+    this.loggedInUser = this.authService.loggedInUser;
     this.getAllUsers();
+    
   }
 
   ngOnInit() {
+   
   }
 
 
@@ -36,8 +41,9 @@ export class AllUsersComponent implements OnInit {
 
 
   public getAllUsers() {
-    this._userAccountService.getAllUsers().then(clients => {
-      this.dataSource = new MatTableDataSource(clients);
+    this._userAccountService.getAllUsers(this.loggedInUser.userId, this.loggedInUser.clientId).then(users => {
+      console.log('all users : ', users);
+      this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })

@@ -9,44 +9,67 @@
 
 
 <mat-card>
+  <mat-card-header>
+    <mat-card-subtitle>* indicates that fields are required</mat-card-subtitle>
+  </mat-card-header>
 
   <mat-card-content>
     <form [formGroup]="createPortalForm" (ngSubmit)="createPortal()">
       <div class="row">
+
+        <!-- portal name -->
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
-            <input formControlName="portalName" matInput placeholder="Portal Name">
+            <input formControlName="portalName" matInput placeholder="Portal Name *">
             <mat-error *ngIf="createPortalForm.controls.portalName.invalid">
               <span *ngIf="createPortalForm.controls.portalName.errors.required">Please enter portal name</span>
             </mat-error>
           </mat-form-field>
         </div>
 
+        <!-- url -->
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
-            <input type="url" formControlName="url" matInput placeholder="Url">
+            <input type="url" formControlName="url" matInput placeholder="Url *">
             <mat-error *ngIf="createPortalForm.controls.url.invalid">
               <span *ngIf="createPortalForm.controls.url.errors.required">Please enter portal url</span>
               <span *ngIf="createPortalForm.controls.url.errors.validateUrl">Please enter valid url</span>
             </mat-error>
           </mat-form-field>
         </div>
-        
+
+        <!-- Agreement tenure -->
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
-            <input type="number" formControlName="agreementTenure" matInput placeholder="Agreement tenure">
+            <input type="number" formControlName="agreementTenure" matInput placeholder="Agreement tenure (in months)">
           </mat-form-field>
         </div>
 
+        <!-- email -->
         <div class="col-md-6 col-xs-12">
           <mat-form-field class="form-field-block">
-            <input type="email" formControlName="email" matInput placeholder="Email">
+            <input type="email" formControlName="email" matInput placeholder="Email *">
             <mat-error *ngIf="createPortalForm.controls.email.invalid">
-                <span *ngIf="createPortalForm.controls.email.errors.required">Please enter portal url</span>
-                <span *ngIf="createPortalForm.controls.email.errors.validateEmail">Please enter valid url</span>
-              </mat-error>
+              <span *ngIf="createPortalForm.controls.email.errors.required">Please enter portal url</span>
+              <span *ngIf="createPortalForm.controls.email.errors.validateEmail">Please enter valid url</span>
+            </mat-error>
           </mat-form-field>
         </div>
+
+        <!-- content type -->
+        <div class="col-md-6 col-xs-12">
+          <mat-form-field class="form-field-block">
+            <mat-select [compareWith]="compareCtFun" formControlName="contentType" placeholder="Allowed content type *" multiple>
+              <mat-option *ngFor="let ct of contentTypeList" [value]="ct.contentTypeId">{{ct.contentTypeName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="createPortalForm.controls.contentType.invalid">
+              <span *ngIf="createPortalForm.controls.contentType.errors.required">Please choose allowed content
+                type</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- portal id -->
         <input type="hidden" fomrControlName="portalId">
       </div>
       <br>

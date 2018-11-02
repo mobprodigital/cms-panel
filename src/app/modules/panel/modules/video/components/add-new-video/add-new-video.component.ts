@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PortalService } from 'src/app/services/portal/portal.service';
 import { PortalModel } from 'src/app/models/portal.model';
 import { VideoCategoryModel } from 'src/app/models/video-category.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 
 @Component({
@@ -35,8 +36,8 @@ export class AddNewVideoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private _videoService: VideoService,
-    private _userAccountService: UserAccountService,
     private _portalService: PortalService,
+    private _authService: AuthService
   ) {
     this.activatedRoute.paramMap.pipe().subscribe(obs => {
       this.videoId = obs.get('id');
@@ -44,7 +45,7 @@ export class AddNewVideoComponent implements OnInit {
         this.isNewVideo = false;
       }
     })
-    this.loggedInUser = this._userAccountService.loggedInUser;
+    this.loggedInUser = this._authService.loggedInUser;
     
     this.videoFileModel.videoId = '2';
     this.getPortalList();
@@ -142,7 +143,7 @@ export class AddNewVideoComponent implements OnInit {
   }
 
   public getPortalList() {
-    this._portalService.getAllPortals().then(portals => this.portalList = portals);
+    this._portalService.getAllPortalsByClientId(this.loggedInUser.clientId, this.loggedInUser.userId).then(portals => this.portalList = portals);
   }
 
   public getVideoCategoryList(): void {

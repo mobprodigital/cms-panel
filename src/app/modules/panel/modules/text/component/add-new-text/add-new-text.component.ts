@@ -7,6 +7,8 @@ import { TextCategoryModel } from 'src/app/models/text-category.model';
 import { ActivatedRoute } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { UserAccountModel } from 'src/app/models/user-account.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 
 
@@ -26,10 +28,7 @@ export class AddNewTextComponent implements OnInit {
   public textId: string = '';
   public portalsList: PortalModel[] = [];
   public categoriesList: TextCategoryModel[] = [];
-
-  @ViewChild('textFormControl') textFormControl: ElementRef;
-
-
+  public loggedInUser: UserAccountModel = new UserAccountModel();
 
   visible = true;
   selectable = true;
@@ -38,8 +37,16 @@ export class AddNewTextComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   tagList: string[] = [];
 
+  
+  @ViewChild('textFormControl') textFormControl: ElementRef;
 
-  constructor(private _portalService: PortalService, private _textService: TextService, private activatedRoute: ActivatedRoute) {
+
+
+  
+
+
+  constructor(private _portalService: PortalService, private _textService: TextService, private activatedRoute: ActivatedRoute, private authService : AuthService) {
+    this.loggedInUser = this.authService.loggedInUser;
     this.getPorlatsList();
     this.getTextCategories();
 
@@ -148,7 +155,7 @@ export class AddNewTextComponent implements OnInit {
   }
 
   private getPorlatsList() {
-    this._portalService.getAllPortals().then(ptls => { this.portalsList = ptls; }).catch(err => alert(err));
+    this._portalService.getAllPortalsByClientId(this.loggedInUser.clientId, this.loggedInUser.userId).then(ptls => { this.portalsList = ptls; }).catch(err => alert(err));
   }
 
   private getTextCategories() {

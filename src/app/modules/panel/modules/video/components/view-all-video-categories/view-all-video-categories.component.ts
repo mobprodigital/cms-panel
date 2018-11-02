@@ -21,7 +21,7 @@ export class ViewAllVideoCategoriesComponent implements OnInit {
       this.dataSource = new MatTableDataSource(vCats);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    })
+    }).catch(err => alert(err));
   }
 
 

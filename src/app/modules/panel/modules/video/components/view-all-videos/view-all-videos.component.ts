@@ -3,6 +3,7 @@ import { VideoModel } from 'src/app/models/video.model';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { VideoService } from 'src/app/services/video/video.service';
 import { UserAccountService } from 'src/app/services/user-account/user-account.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-view-all-videos',
@@ -18,7 +19,10 @@ export class ViewAllVideosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _videoService: VideoService, private loggedInUser: UserAccountService) {
+  constructor(
+    private _videoService: VideoService, 
+    private _authService: AuthService
+    ) {
     this.getAllVideos();
   }
 
@@ -34,12 +38,12 @@ export class ViewAllVideosComponent implements OnInit {
   }
 
   public getAllVideos() {
-    this._videoService.getAllVideosByClientId(this.loggedInUser.loggedInUser.clientId).then(vids => {
+    this._videoService.getAllVideosByClientId(this._authService.loggedInUser.clientId).then(vids => {
       console.log(vids);
       this.dataSource = new MatTableDataSource(vids);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });
+    }).catch(err => alert(err));
   }
 
   public deleteVideo(videoId) {

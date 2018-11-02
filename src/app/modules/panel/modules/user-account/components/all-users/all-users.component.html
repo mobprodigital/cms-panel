@@ -3,16 +3,16 @@
     <h1 class="page-title">All Users</h1>
   </div>
   <div class="col-6 text-right">
-    <a type="button" mat-raised-button color="primary" [routerLink]="['/panel/user-account/create-user']">Add New</a>
+    <a mat-raised-button color="primary" [routerLink]="['/panel/user-account/create-user']">Add New</a>
   </div>
 </div>
 
-<table mat-table [dataSource]="dataSource" matSort>
+<table *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
 
   <!-- Client Name -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    <td mat-cell *matCellDef="let row"> {{row.fullName}} </td>
   </ng-container>
 
   <!-- Name Column -->
@@ -27,10 +27,15 @@
     <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="action">
+<!--   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-    <td mat-cell *matCellDef="let row"> <a href="javascript:void(0)">Edit</a> </td>
-  </ng-container>
+    <a matTooltip="Edit user" mat-icon-button color="primary" [routerLink]="['/panel/user-account/edit-user', row.userId]">
+      <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+    </a> &nbsp;
+    <a matTooltip="Delete user" (click)="deleteUser(row.userId)" mat-icon-button color="warn">
+      <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+    </a> 
+  </ng-container> -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;">

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PanelComponent } from '../components/panel/panel.component';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
 
 
 const panelRoutes: Routes = [
@@ -24,8 +25,15 @@ const panelRoutes: Routes = [
       {
         path: 'text',
         loadChildren: '../modules/text/text.module#TextModule'
+      },
+      {
+        path : '',
+        component : DashboardComponent
+      },
+      {
+        path : '**',
+        component : DashboardComponent
       }
-
     ]
   },
   {

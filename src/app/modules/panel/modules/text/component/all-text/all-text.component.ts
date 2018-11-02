@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextService } from 'src/app/services/text/text.service';
 import { TextModel } from 'src/app/models/text.model';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { PortalModel } from 'src/app/models/portal.model';
+import { UserAccountModel } from 'src/app/models/user-account.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-all-text',
@@ -16,8 +17,12 @@ export class AllTextComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _textService: TextService) {
-    this._textService.getAllTexts().then(portals => {
+  public loggedInUser: UserAccountModel = new UserAccountModel();
+
+
+  constructor(private _textService: TextService, private authService: AuthService) {
+    this.loggedInUser = this.authService.loggedInUser;
+    this._textService.getAllTexts(this.loggedInUser.clientId).then(portals => {
       this.dataSource = new MatTableDataSource(portals);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
