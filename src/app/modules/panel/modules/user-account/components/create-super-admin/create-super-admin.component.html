@@ -11,8 +11,8 @@
   <mat-card>
     <mat-card-content>
       <!-- select client -->
-      <mat-form-field class="form-field-block">
-        <mat-select formControlName="clientId" placeholder="Select client *">
+      <mat-form-field class="form-field-block" [ngClass]="{'mat-select-readonly' : !isNewSuperAdmin}">
+        <mat-select class="pointer-events-none" (selectionChange)="getPortalsByClient($event.value)" formControlName="clientId" placeholder="Select client *">
           <mat-option *ngFor="let clnt of clientList" [value]="clnt.clientId">
             {{clnt.clientName}}
           </mat-option>

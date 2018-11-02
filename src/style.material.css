@@ -15,3 +15,15 @@ a.mat-raised-button:hover {
 .mat-radio-group .mat-radio-button {
   margin-right: 11px;
 }
+
+.mat-select-readonly {
+  cursor: not-allowed;
+}
+
+.mat-select-readonly>div {
+  pointer-events: none;
+}
+
+.mat-select-readonly span.mat-select-value-text {
+  color: #b1b1b1;
+}

@@ -7,9 +7,7 @@
   </div>
 </div>
 
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-</mat-form-field>
+
 
 
 <mat-card>
@@ -28,6 +26,9 @@
 <br>
 
 <section *ngIf="dataSource">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="name">

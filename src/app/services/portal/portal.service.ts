@@ -32,7 +32,7 @@ export class PortalService {
   public getAllPortalsByClientId(clientId : string, userId : string): Promise<PortalModel[]> {
     return new Promise((resolve, reject) => {
       this._ajaxService.Post({
-        apiName: this.apiPrefix + 'getPortalListingByClientId.php',
+        apiName: 'user_account/superadmin/getPortalListingByClientId.php',
         dataToSend : {
           clientId : clientId,
           userId : userId

@@ -37,9 +37,10 @@ export class CreateSuperAdminComponent implements OnInit {
       }
 
     });
-
-    
-
+    this.getClients();
+    if(!this.isNewSuperAdmin){
+      this.getPortalsByClient(this.clientId);
+    }
   }
 
   ngOnInit() {
@@ -55,11 +56,10 @@ export class CreateSuperAdminComponent implements OnInit {
       userId: new FormControl(this.userId)
     });
 
-    this.getClientsAndPortals();
 
     if (!this.isNewSuperAdmin) {
       this._userAccountService.getSuperAdmin(this.clientId, this.userId).then(sa => {
-        
+
         this.superAdminForm.reset({
           firstName: sa.firstName,
           lastName: sa.lastName,
@@ -70,7 +70,10 @@ export class CreateSuperAdminComponent implements OnInit {
           assignedPortals: sa.assignedPortals,
           userId: sa.userId,
         });
+
+
       }).catch(err => alert(err));
+
     }
 
   }
@@ -87,10 +90,12 @@ export class CreateSuperAdminComponent implements OnInit {
     }
   }
 
-  public getClientsAndPortals() {
-    this._portalService.getAllPortalsByClientId(this.superAdminForm.controls['clientId'].value, this.superAdminForm.controls['userId'].value).then(porlats => this.portalList = porlats).catch(err => alert(err));
+  public getClients() {
     this._userAccountService.getAllClients().then(porlats => this.clientList = porlats).catch(err => alert(err));
+  }
 
+  public getPortalsByClient(clid?: string) {
+    this._portalService.getAllPortalsByClientId((!!clid ? clid : this.clientId), this.userId).then(porlats => this.portalList = porlats).catch(err => alert(err));
   }
 
 }
