@@ -1,3 +1,5 @@
+import { ContentTypeEnum } from "../enums/content-type.enum";
+
 export class ContentTypeModel {
-    constructor(public contentTypeId: string, public contentTypeName: string) { }
+    constructor(public contentTypeId: ContentTypeEnum, public contentTypeName: string) { }
 }

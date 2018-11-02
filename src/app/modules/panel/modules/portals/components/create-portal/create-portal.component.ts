@@ -5,6 +5,7 @@ import { PortalModel } from 'src/app/models/portal.model';
 import { CustomValidators } from 'src/app/custom-validators/custom-validators';
 import { ActivatedRoute } from '@angular/router';
 import { ContentTypeModel } from 'src/app/models/content-type.model';
+import { ContentTypeEnum } from 'src/app/enums/content-type.enum';
 
 @Component({
   selector: 'app-create-portal',
@@ -18,10 +19,10 @@ export class CreatePortalComponent implements OnInit {
   public portal: PortalModel = new PortalModel();
   public portalId: string = '';
   public contentTypeList: ContentTypeModel[] = [
-    new ContentTypeModel('1', 'Audio'),
-    new ContentTypeModel('2', 'Video'),
-    new ContentTypeModel('3', 'Image'),
-    new ContentTypeModel('4', 'Stories')
+    new ContentTypeModel(ContentTypeEnum.Audio, ContentTypeEnum[ContentTypeEnum.Audio]),
+    new ContentTypeModel(ContentTypeEnum.Video, ContentTypeEnum[ContentTypeEnum.Video]),
+    new ContentTypeModel(ContentTypeEnum.Image, ContentTypeEnum[ContentTypeEnum.Image]),
+    new ContentTypeModel(ContentTypeEnum.Story, ContentTypeEnum[ContentTypeEnum.Story])
   ]
   constructor(private _portalService: PortalService, private route: ActivatedRoute) {
     this.route.paramMap.pipe().subscribe(obs => {
